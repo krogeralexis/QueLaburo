@@ -210,7 +210,7 @@
             if (pattern.test(correo) || pattern.test(password)) {
                 e.preventDefault();
                 document.body.style.background = "#ffdddd";
-                alert("🚫 Intento de inyección SQL detectado. Por favor, ingresá datos válidos.");
+                alert("Intento de inyección SQL detectado. Por favor, ingresá datos válidos.");
                 return;
             }
         }
