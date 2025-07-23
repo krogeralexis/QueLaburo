@@ -174,5 +174,47 @@
             }
         });
     </script>
+ <script>
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            togglePassword.setAttribute('aria-label', 'Ocultar contraseña');
+        } else {
+            passwordInput.type = 'password';
+            togglePassword.setAttribute('aria-label', 'Mostrar contraseña');
+        }
+    });
+
+    // Detección básica de SQL Injection
+    const form = document.querySelector('form');
+    const correoInput = document.getElementById('correo');
+
+    form.addEventListener('submit', function(e) {
+        const suspiciousPatterns = [
+            /(\bor\b|\band\b)\s+\d+=\d+/i,       // OR 1=1, AND 1=1
+            /('|")\s*--/,                         // '-- o "-- para comentar
+            /union\s+select/i,                    // UNION SELECT
+            /drop\s+table/i,                      // DROP TABLE
+            /insert\s+into/i,                     // INSERT INTO
+            /delete\s+from/i,                     // DELETE FROM
+            /--|;|#/                              // Comentarios y fin de sentencia
+        ];
+
+        const correo = correoInput.value;
+        const password = passwordInput.value;
+
+        for (const pattern of suspiciousPatterns) {
+            if (pattern.test(correo) || pattern.test(password)) {
+                e.preventDefault();
+                document.body.style.background = "#ffdddd";
+                alert("🚫 Intento de inyección SQL detectado. Por favor, ingresá datos válidos.");
+                return;
+            }
+        }
+    });
+</script>
 </body>
 </html>
