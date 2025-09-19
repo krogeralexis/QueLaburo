@@ -1,0 +1,63 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6vh;
+   width: 40vw;     /* usa % en vez de vw, más flexible */
+  height: 40vh;
+}
+.form-group {
+  display: flex;
+  gap: 1.6vh;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+  flex: 1;
+}
+.field label {
+  font-size: 1.6vh;
+  font-weight: 400;
+  color: #21272A;
+}
+.field input {
+  padding: 1.6vh 1.2vw;
+  background: #F2F4F8;
+  border: none;
+  border-bottom: 1px solid #C1C7CD;
+  font-size: 1.6vh;
+  color: #697077;
+}
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6vw;
+}
+
+.login-link a {
+  color: #0F62FE;
+  text-decoration: none;
+  text-align: center;
+  margin-top: -1.3vh;
+  font-size: 3vh;
+}
+.form-actions{
+  display: flex;
+  height: 10vh;
+  width: 20vh;
+}
+.btn-primary.btn-text {
+  width: 10vw;
+  height: 9vh;
+  font-size: 1.6vh;
+  color: #fff;
+  text-decoration: none;
+  background: #0F62FE;
+  border: none;
+  cursor: pointer;
+}

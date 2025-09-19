@@ -3,8 +3,16 @@ namespace Core;
 
 class Router {
     public static function route() {
-        $controller = $_GET['controller'] ?? 'login';
-        $action = $_GET['action'] ?? 'index';
+        // Soporta URL limpia con ?url=usuario/index o fallback
+        $url = $_GET['url'] ?? '';
+        if ($url) {
+            $parts = explode('/', trim($url, '/'));
+            $controller = $parts[0] ?? 'usuario';
+            $action = $parts[1] ?? 'index';
+        } else {
+            $controller = $_GET['controller'] ?? 'usuario';
+            $action = $_GET['action'] ?? 'index';
+        }
 
         // Limpieza básica
         $controller = preg_replace('/[^a-zA-Z0-9]/', '', $controller);
@@ -13,20 +21,14 @@ class Router {
         $controllerClass = ucfirst($controller) . 'Controller';
         $controllerFile = "controllers/{$controllerClass}.php";
 
-        if (!file_exists($controllerFile)) {
-            die("Controlador no encontrado");
-        }
-
+        if (!file_exists($controllerFile)) die("Controlador no encontrado");
         require_once $controllerFile;
-        if (!class_exists($controllerClass)) {
-            die("Clase controlador no encontrada");
-        }
+
+        if (!class_exists($controllerClass)) die("Clase controlador no encontrada");
 
         $controllerObj = new $controllerClass();
 
-        if (!method_exists($controllerObj, $action)) {
-            die("Acción no encontrada");
-        }
+        if (!method_exists($controllerObj, $action)) die("Acción no encontrada");
 
         $controllerObj->$action();
     }

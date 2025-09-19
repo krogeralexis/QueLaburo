@@ -1,0 +1,147 @@
+/* ==============================
+   SEARCH BAR
+============================== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 40vw;       /* ancho fijo */
+  height: 6vh;       /* alto fijo */
+  border: 1px #ccc;
+  font-size: 2.3vh;
+  overflow: hidden;
+  margin: 2vh auto;   /* centrado horizontal */
+  background: #fff;
+}
+
+.search-bar .search-icon {
+  padding: 0 1vh;
+  height: 3vh;
+  color: #697077;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  height: 100%;
+}
+
+.search-bar .filter-btn {
+  width: auto;
+  height: 3vh;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1vh;
+  padding: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/* CARDS */
+.card-container {
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+  gap: 2vw;          /* separación entre cards */
+  overflow: hidden;   /* oculta el contenido que salga del contenedor */
+  width: 100vw;
+  margin: 2vh 0;
+  position: relative;
+}
+
+.card {
+  width: 15vw;       /* ancho relativo al viewport */
+  height: 60vh;      /* altura relativa al viewport */
+  border: 0.2vh solid #DDE1E6;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;     /* evita que se reduzca al hacer scroll */
+}
+
+.card-img {
+  width: 100%;
+  height: 35vh;       /* altura de la imagen */
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 2vh 1.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.category {
+  font-size: 1.2vh;
+  color: #777;
+}
+
+.title {
+  font-size: 2vh;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 1.5vh;
+  color: #21272A;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2vw;
+  height: 2vh;
+}
+
+.name {
+  font-size: 1.5vh;
+  font-weight: 500;
+}
+
+.role {
+  font-size: 1.2vh;
+  color: #666;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 1vw;
+  margin-top: auto;
+}
+
+.main-btn {
+  flex: 1;
+  padding: 1vh 0;
+  font-size: 1.5vh;
+  border: 0.2vh solid #21272A;
+  background: #fff;
+  cursor: pointer;
+}
+
+.main-btn:hover {
+  background: #21272A;
+  color: #FFFFFF;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  width: 3vw;
+  font-size: 2.4vh;
+  cursor: pointer;
+}

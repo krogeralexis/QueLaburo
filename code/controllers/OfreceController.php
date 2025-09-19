@@ -3,6 +3,22 @@ require_once 'models/Ofrece.php';
 require_once 'core/View.php';
 
 class OfreceController {
+    public function __construct() 
+    {
+        /*Premade de seguridad para no permitr a usuarios no
+        logeados entrar a los controller, metodo $accionesPermitidas
+        permite evadirlo para poder hacer pruebas
+        */
+    $action = $_GET['action'] ?? '';
+
+    $accionesPermitidas = [];
+
+    if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) 
+        {
+            header('Location: index.php?controller=login&action=index');
+            exit;
+        }
+    }
     public function index() {
         $ofrece = new Ofrece();
         $datos = $ofrece->getAll();

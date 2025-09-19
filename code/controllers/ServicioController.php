@@ -1,9 +1,24 @@
 <?php
-// controllers/ServicioController.php
 require_once 'models/Servicio.php';
 require_once 'core/View.php';
 
 class ServicioController {
+    public function __construct() 
+    {
+        /*Premade de seguridad para no permitr a usuarios no
+        logeados entrar a los controller, metodo $accionesPermitidas
+        permite evadirlo para poder hacer pruebas
+        */
+    $action = $_GET['action'] ?? '';
+
+    $accionesPermitidas = [];
+
+    if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) 
+        {
+            header('Location: index.php?controller=login&action=index');
+            exit;
+        }
+    }
     public function index() {
         $servicio = new Servicio();
         $servicios = $servicio->getAll();

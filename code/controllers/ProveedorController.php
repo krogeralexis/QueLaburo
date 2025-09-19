@@ -1,9 +1,24 @@
 <?php
-// controllers/ProveedorController.php
 require_once 'models/Proveedor.php';
 require_once 'core/View.php';
 
 class ProveedorController {
+    public function __construct() 
+    {
+        /*Premade de seguridad para no permitr a usuarios no
+        logeados entrar a los controller, metodo $accionesPermitidas
+        permite evadirlo para poder hacer pruebas
+        */
+    $action = $_GET['action'] ?? '';
+
+    $accionesPermitidas = [];
+
+    if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) 
+        {
+            header('Location: index.php?controller=login&action=index');
+            exit;
+        }
+    }
     public function index() {
         $proveedor = new Proveedor();
         $proveedores = $proveedor->getAll();
@@ -15,19 +30,30 @@ class ProveedorController {
     }
 
     public function store() {
-        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
+    // Sanitización manual
+        $nombre = filter_input(INPUT_POST, 'nombre', FILTER_UNSAFE_RAW);
+        $nombre = $nombre ? trim(strip_tags($nombre)) : null;
+
         $correo = filter_input(INPUT_POST, 'correo', FILTER_SANITIZE_EMAIL);
-        $telefono = filter_input(INPUT_POST, 'telefono', FILTER_SANITIZE_STRING);
-        $referencias = filter_input(INPUT_POST, 'referencias', FILTER_SANITIZE_STRING);
+
+        $telefono = filter_input(INPUT_POST, 'telefono', FILTER_UNSAFE_RAW);
+        $telefono = $telefono ? trim(strip_tags($telefono)) : null;
+
+        $referencias = filter_input(INPUT_POST, 'referencias', FILTER_UNSAFE_RAW);
+        $referencias = $referencias ? trim(strip_tags($referencias)) : null;
+
         $calificacion = filter_input(INPUT_POST, 'calificacion', FILTER_VALIDATE_FLOAT);
         $ventas = filter_input(INPUT_POST, 'cantidad_ventas', FILTER_VALIDATE_INT);
 
-        if ($nombre && $correo && $telefono !== false) {
-            $proveedor = new Proveedor();
-            $proveedor->create($nombre, $correo, $telefono, $referencias, $calificacion, $ventas);
-        }
-        header('Location: index.php?controller=proveedor&action=index');
+    // Validación mínima: que nombre, correo y telefono existan
+    if ($nombre && $correo && $telefono) 
+    {
+        $proveedor = new Proveedor();
+        $proveedor->create($nombre, $correo, $telefono, $referencias, $calificacion, $ventas);
     }
+
+    header('Location: index.php?controller=proveedor&action=index');
+}
 
     public function edit() {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

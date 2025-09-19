@@ -1,5 +1,4 @@
 <?php
-// views/servicio/index.php
 ?>
 <!DOCTYPE html>
 <html>

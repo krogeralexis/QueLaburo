@@ -3,9 +3,9 @@
 
 class Database {
     private static $host = 'localhost';
-    private static $db = 'nombre_de_tu_base'; // Reemplaza esto
-    private static $user = 'usuario';         // Reemplaza esto
-    private static $pass = 'contraseña';      // Reemplaza esto
+    private static $db = 'queLaburo';
+    private static $user = 'root';
+    private static $pass = 'root';      
     private static $charset = 'utf8mb4';
 
     public static function connect() {

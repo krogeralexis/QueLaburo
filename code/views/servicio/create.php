@@ -1,5 +1,5 @@
 <?php
-// views/servicio/create.php
+
 ?>
 <!DOCTYPE html>
 <html>

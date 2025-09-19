@@ -4,12 +4,12 @@ require_once 'core/Model.php';
 
 class Administrador extends Core\Model {
     public function getAll() {
-        $stmt = $this->db->query("SELECT * FROM Administrador INNER JOIN Usuario ON Administrador.id_administrador = Usuario.id_usuario");
+        $stmt = $this->db->query("SELECT * FROM Administrador INNER JOIN Usuario ON Administrador.id_administrador = Usuario.id");
         return $stmt->fetchAll();
     }
 
     public function getById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM Administrador INNER JOIN Usuario ON Administrador.id_administrador = Usuario.id_usuario WHERE Administrador.id_administrador = :id");
+        $stmt = $this->db->prepare("SELECT * FROM Administrador INNER JOIN Usuario ON Administrador.id_administrador = Usuario.id WHERE Administrador.id_administrador = :id");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
@@ -22,11 +22,11 @@ class Administrador extends Core\Model {
             'correo' => $correo,
             'telefono' => $telefono
         ]);
-        $id_usuario = $this->db->lastInsertId();
+        $id = $this->db->lastInsertId();
 
         $stmt2 = $this->db->prepare("INSERT INTO Administrador (id_administrador, cantrep_resuelto, estado, especialidad, nombre, correo, telefono, fecha_creacion) VALUES (:id, :cantrep, :estado, :especialidad, :nombre, :correo, :telefono, NOW())");
         $stmt2->execute([
-            'id' => $id_usuario,
+            'id' => $id,
             'cantrep' => $cantrep_resuelto,
             'estado' => $estado,
             'especialidad' => $especialidad,
@@ -38,7 +38,7 @@ class Administrador extends Core\Model {
     }
 
     public function update($id, $nombre, $correo, $telefono, $especialidad, $estado, $cantrep_resuelto) {
-        $stmt1 = $this->db->prepare("UPDATE Usuario SET nombre = :nombre, correo = :correo, telefono = :telefono WHERE id_usuario = :id");
+        $stmt1 = $this->db->prepare("UPDATE Usuario SET nombre = :nombre, correo = :correo, telefono = :telefono WHERE id = :id");
         $stmt1->execute([
             'id' => $id,
             'nombre' => $nombre,
@@ -61,7 +61,7 @@ class Administrador extends Core\Model {
     public function delete($id) {
         $this->db->beginTransaction();
         $this->db->prepare("DELETE FROM Administrador WHERE id_administrador = :id")->execute(['id' => $id]);
-        $this->db->prepare("DELETE FROM Usuario WHERE id_usuario = :id")->execute(['id' => $id]);
+        $this->db->prepare("DELETE FROM Usuario WHERE id = :id")->execute(['id' => $id]);
         $this->db->commit();
     }
 }

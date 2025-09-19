@@ -3,6 +3,24 @@ require_once 'models/Mensaje.php';
 require_once 'core/View.php';
 
 class MensajeController {
+
+    public function __construct() 
+    {
+        /*Premade de seguridad para no permitr a usuarios no
+        logeados entrar a los controller, metodo $accionesPermitidas
+        permite evadirlo para poder hacer pruebas
+        */
+    $action = $_GET['action'] ?? '';
+
+    $accionesPermitidas = []; // ['function','function'] para acceder a alguna funcion
+
+    if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) 
+        {
+            header('Location: index.php?controller=login&action=index');
+            exit;
+        }
+    }
+
     public function index() {
         $msg = new Mensaje();
         $mensajes = $msg->getAll();

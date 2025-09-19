@@ -1,0 +1,180 @@
+1. **Iniciar Sesion**
+
+   * El usuario ingresa credenciales.
+   * El sistema valida en BD.
+   * Alternativas: acceso concedido, cuenta no verificada, usuario/contraseña inválidos.
+
+2. **Registrarse**
+
+   * Usuario completa formulario.
+   * Se valida que no exista otro con mismo nombre o email.
+   * Alternativas: registro exitoso, error en BD, usuario ya registrado.
+
+3. **Ver Perfil**
+
+   * Usuario pide ver su perfil.
+   * El sistema recupera datos de la BD.
+   * Alternativas: perfil encontrado o no encontrado.
+
+4. **Editar Perfil**
+
+   * Usuario modifica sus datos.
+   * El sistema actualiza en BD.
+   * Alternativas: actualización correcta o error al actualizar.
+
+5. **Enviar Mensaje**
+
+   * Usuario redacta mensaje a otro usuario.
+   * El sistema verifica que el destinatario exista.
+   * Alternativas: mensaje enviado, error de BD, destinatario inexistente.
+
+6. **Leer Mensaje**
+
+   * Usuario solicita ver mensajes recibidos.
+   * El sistema los recupera de BD.
+   * Alternativas: mensajes disponibles o no hay mensajes.
+
+7. **Dejar Resena**
+
+   * Cliente escribe reseña sobre un servicio.
+   * Se valida que tenga una reserva finalizada y que no haya reseñado antes.
+   * Alternativas: reseña guardada, error en BD, reseña duplicada, reserva no finalizada, cliente no logueado.
+
+8. **Calificar Servicio**
+
+   * Cliente da una calificación numérica a un servicio.
+   * Igual que reseña: requiere reserva finalizada y no haber calificado antes.
+   * Alternativas: calificación guardada, error BD, calificación duplicada, reserva no finalizada, cliente no logueado.
+
+9. **Calificar Cliente**
+
+   * Proveedor califica al cliente con el que tuvo una reserva finalizada.
+   * Se verifica que no haya calificado antes.
+   * Alternativas: calificación registrada, error BD, duplicada, reserva no finalizada, proveedor no logueado.
+
+10. **Buscar Servicio**
+
+    * Usuario ingresa palabras clave.
+    * El sistema busca en nombre o descripción.
+    * Alternativas: servicios encontrados o sin resultados.
+
+11. **Publicar Servicio**
+
+    * Proveedor registra un servicio nuevo.
+    * Se valida que no tenga otro con el mismo nombre.
+    * Alternativas: publicación exitosa, error BD, duplicado, proveedor no logueado.
+
+12. **Editar Servicio**
+
+    * Proveedor modifica los datos de un servicio publicado.
+    * Se verifica que exista en BD.
+    * Alternativas: edición correcta, error BD, servicio no existe, proveedor no logueado.
+
+13. **Eliminar Servicio**
+
+    * Proveedor elimina un servicio de su listado.
+    * El sistema valida que le pertenezca.
+    * Alternativas: eliminación exitosa, error BD, servicio no existe, proveedor no logueado.
+
+14. **Reservar Servicio**
+
+    * Cliente agenda un servicio.
+    * Se valida que el servicio esté activo.
+    * Alternativas: reserva creada, error BD, servicio no disponible, cliente no logueado.
+
+15. **Cancelar Reserva**
+
+    * Cliente cancela una reserva pendiente.
+    * El sistema valida que exista y le pertenezca.
+    * Alternativas: cancelación correcta, error BD, reserva no existe, cliente no logueado.
+
+16. **Consultar Reservas**
+
+    * Cliente revisa todas sus reservas.
+    * El sistema consulta la BD.
+    * Alternativas: lista de reservas o sin registros, cliente no logueado.
+
+17. **Consultar Reportes**
+
+    * Moderador pide ver reportes de usuarios/servicios.
+    * El sistema consulta BD.
+    * Alternativas: reportes disponibles o ninguno, moderador no logueado.
+
+18. **Bloquear Usuario**
+
+    * Moderador bloquea un usuario por incumplimiento.
+    * El sistema valida que exista.
+    * Alternativas: bloqueo exitoso, error BD, usuario no existe, moderador no logueado.
+
+19. **Desbloquear Usuario**
+
+    * Moderador desbloquea un usuario.
+    * Validación igual al bloqueo.
+    * Alternativas: desbloqueo exitoso, error BD, usuario no existe, moderador no logueado.
+
+20. **Generar Reporte**
+
+    * Administrador genera un informe según parámetros.
+    * El sistema filtra datos en BD.
+    * Alternativas: reporte generado, sin datos, administrador no logueado.
+
+
+21. **Crear Ticket de Soporte**
+
+    * Usuario genera un ticket con asunto y descripción.
+    * El sistema lo registra en BD.
+    * Alternativas: ticket creado, error BD, usuario no logueado.
+
+22. **Consultar Tickets**
+
+    * Usuario pide ver sus tickets abiertos o cerrados.
+    * El sistema consulta BD.
+    * Alternativas: tickets disponibles o ninguno, usuario no logueado.
+
+23. **Responder Ticket**
+
+    * Soporte agrega una respuesta a un ticket abierto.
+    * El sistema valida que exista y esté activo.
+    * Alternativas: respuesta guardada, error BD, ticket cerrado/inexistente, soporte no logueado.
+
+24. **Cerrar Ticket**
+
+    * Soporte cierra un ticket abierto.
+    * Validación en BD.
+    * Alternativas: cierre exitoso, error BD, ticket inexistente o ya cerrado, soporte no logueado.
+
+25. **Notificar Usuario**
+
+    * Administrador envía una notificación a un usuario.
+    * Validación de existencia.
+    * Alternativas: notificación enviada, error BD, usuario no existe, administrador no logueado.
+
+26. **Consultar Notificaciones**
+
+    * Usuario revisa sus notificaciones.
+    * El sistema consulta BD.
+    * Alternativas: notificaciones disponibles o ninguna, usuario no logueado.
+
+27. **Cambiar Rol Usuario**
+
+    * Administrador cambia el rol de un usuario (ej: cliente → proveedor).
+    * Validación de existencia.
+    * Alternativas: rol cambiado, error BD, usuario no existe, administrador no logueado.
+
+28. **Consultar Usuarios**
+
+    * Administrador obtiene lista de usuarios registrados.
+    * El sistema consulta BD.
+    * Alternativas: lista obtenida o vacía, administrador no logueado.
+
+29. **Restablecer Password**
+
+    * Usuario solicita recuperar acceso con su email.
+    * El sistema genera un token y lo envía por correo.
+    * Alternativas: email válido y token generado, error BD, email no existe.
+
+30. **Cambiar Password**
+
+    * Usuario ingresa nueva contraseña con token de recuperación.
+    * El sistema valida el token.
+    * Alternativas: password cambiada, error BD, token inválido o vencido.
