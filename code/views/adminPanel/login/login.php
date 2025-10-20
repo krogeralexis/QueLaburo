@@ -8,7 +8,7 @@
 <?php include 'components/header.php'; ?>
 
 <main class="login-container">
-  <form class="login-form" action="index.php?controller=login&action=authenticate" method="POST" autocomplete="off">
+  <form class="login-form" action="index.php?controller=login&action=authenticate" method="post" autocomplete="off">
     <label for="email">Email</label>
     <input type="email" id="email" name="correo" placeholder="Email" required>
 

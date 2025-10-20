@@ -16,9 +16,7 @@
   <?php include 'components/header-usuario.php'; ?>
   <?php include 'components/main.php'; ?>
   <?php include 'components/footer.php'; ?>
-  <!-- JS -->
-  <script src="js/header/profile.js"></script>
-  <script src="js/carrusel.js"></script>
-  <script src="js/filtrito.js"></script>
+  
+
 </body>
 </html>

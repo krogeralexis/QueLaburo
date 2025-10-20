@@ -10,17 +10,11 @@ use Core\Router;
 
 session_start();
 
-// Detectamos si es panel de admin
 $url = $_GET['url'] ?? '';
 $parts = explode('/', trim($url, '/'));
 
-    // Marcamos que estamos en panel de admin
-
 if ($parts[0] === 'admin') {
     $_SESSION['isAdminPanel'] = true;
-
-    // Quitamos el prefijo 'admin' para que el router siga funcionando normalmente
-    
     $_GET['url'] = implode('/', array_slice($parts, 1));
 } else {
     $_SESSION['isAdminPanel'] = false;

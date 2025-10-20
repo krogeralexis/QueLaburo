@@ -22,11 +22,11 @@ class ProveedorController {
     public function index() {
         $proveedor = new Proveedor();
         $proveedores = $proveedor->getAll();
-        Core\View::render('proveedor/index', ['proveedores' => $proveedores]);
+        Core\View::render('adminPanel/proveedor/index', ['proveedores' => $proveedores]);
     }
 
     public function create() {
-        Core\View::render('proveedor/create');
+        Core\View::render('adminPanel/proveedor/create');
     }
 
     public function store() {
@@ -60,7 +60,7 @@ class ProveedorController {
         if ($id) {
             $proveedor = new Proveedor();
             $data = $proveedor->getById($id);
-            Core\View::render('proveedor/edit', ['proveedor' => $data]);
+            Core\View::render('adminPanel/proveedor/edit', ['proveedor' => $data]);
         }
     }
 

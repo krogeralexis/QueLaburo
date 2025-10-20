@@ -4,19 +4,19 @@
 .search-bar {
   display: flex;
   align-items: center;
-  width: 40vw;       /* ancho fijo */
-  height: 6vh;       /* alto fijo */
-  border: 1px #ccc;
+  width: 40vw;
+  height: 6vh;
+  border: 1px solid #ccc;
   font-size: 2.3vh;
   overflow: hidden;
-  margin: 2vh auto;   /* centrado horizontal */
+  margin: 2vh auto;
   background: #fff;
+  position: relative; /* Para el dropdown */
 }
 
 .search-bar .search-icon {
   padding: 0 1vh;
   height: 3vh;
-  color: #697077;
   display: flex;
   align-items: center;
 }
@@ -40,24 +40,75 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+/* Dropdown menu para filtros */
+.filter-dropdown {
+  display: none; /* se muestra al hacer click */
+  position: absolute;
+  top: 100%; /* justo debajo del botón */
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0.5vh 1vh rgba(0,0,0,0.1);
+  z-index: 100;
+  width: 15vw;
+  min-width: 150px;
+}
+
+.filter-dropdown.active {
+  display: block;
+}
+
+.filter-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.5vh 0;
+}
+
+.filter-dropdown ul li {
+  padding: 1vh 2vw;
+  cursor: pointer;
+  font-size: 1.5vh;
+}
+
+.filter-dropdown ul li:hover {
+  background-color: #f0f0f0;
 }
 
 
-
-/* CARDS */
+/* ==============================
+   CARDS / CARRUSEL
+============================== */
 .card-container {
   display: flex;
-  justify-content: center ;
+  justify-content: center;
   align-items: center;
-  gap: 2vw;          /* separación entre cards */
-  overflow: hidden;   /* oculta el contenido que salga del contenedor */
+  gap: 1vw;
+  overflow: hidden;
   width: 100vw;
   margin: 2vh 0;
   position: relative;
 }
 
+/* Contenedor que se desplaza (carrusel horizontal) */
+.carousel-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 90vw;
+  padding: 1vh 0;
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+  display: none; /* Oculta la barra de scroll */
+}
+
 .card {
-  width: 15vw;       /* ancho relativo al viewport */
+ width: 17vw;       /* ancho relativo al viewport */
   height: 60vh;      /* altura relativa al viewport */
   border: 0.2vh solid #DDE1E6;
   background: #fff;
@@ -68,7 +119,7 @@
 
 .card-img {
   width: 100%;
-  height: 35vh;       /* altura de la imagen */
+  height: 35vh;
   object-fit: cover;
 }
 
@@ -77,6 +128,7 @@
   display: flex;
   flex-direction: column;
   gap: 1vh;
+  flex-grow: 1;
 }
 
 .category {
@@ -113,11 +165,6 @@
   font-weight: 500;
 }
 
-.role {
-  font-size: 1.2vh;
-  color: #666;
-}
-
 .card-buttons {
   display: flex;
   gap: 1vw;
@@ -135,7 +182,7 @@
 
 .main-btn:hover {
   background: #21272A;
-  color: #FFFFFF;
+  color: #fff;
 }
 
 .arrow {
@@ -144,4 +191,32 @@
   width: 3vw;
   font-size: 2.4vh;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.arrow.left {
+  left: 1vw;
+}
+
+.arrow.right {
+  right: 1vw;
+}
+
+.arrow img {
+  width: 100%;
+  height: auto;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .card {
+    width: 80vw;
+    margin: 0 5vw;
+  }
+  .filter-dropdown {
+    width: 50vw;
+  }
 }

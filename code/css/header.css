@@ -144,6 +144,7 @@
   object-fit: cover;
 }
 
+
 /* ==============================
    RESPONSIVE
 ============================== */
@@ -173,4 +174,71 @@
   .logo-text span {
     font-size: 1.6vh;
   }
+}
+
+/* ==============================
+   PROFILE MENU (desplegable)
+============================== */
+.profile-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn:hover .usr-img {
+  box-shadow: 0 0 0.4vh #00000030;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+/* Menú desplegable */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 1vh);
+  background: #FFFFFF;
+  border: 0.1vh solid #DDE1E6;
+  border-radius: 1vh;
+  box-shadow: 0 0.6vh 1vh rgba(0, 0, 0, 0.15);
+  min-width: 14vw;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-0.5vh);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Enlaces dentro del menú */
+.dropdown-menu a {
+  display: block;
+  padding: 1.2vh 1.5vw;
+  text-decoration: none !important;
+  color: #21272A !important;
+  font-size: 2vh;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  background: transparent;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Hover */
+.dropdown-menu a:hover {
+  background: #F2F4F8;
+  color: #000000 !important;
+}
+
+/* Mostrar menú */
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }

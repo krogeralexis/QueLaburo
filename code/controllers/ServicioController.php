@@ -3,26 +3,20 @@ require_once 'models/Servicio.php';
 require_once 'core/View.php';
 
 class ServicioController {
-    public function __construct() 
-    {
-        /*Premade de seguridad para no permitr a usuarios no
-        logeados entrar a los controller, metodo $accionesPermitidas
-        permite evadirlo para poder hacer pruebas
-        */
-    $action = $_GET['action'] ?? '';
+    public function __construct() {
+        $action = $_GET['action'] ?? '';
+        $accionesPermitidas = [];
 
-    $accionesPermitidas = [];
-
-    if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) 
-        {
+        if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) {
             header('Location: index.php?controller=login&action=index');
             exit;
         }
     }
+
     public function index() {
-        $servicio = new Servicio();
-        $servicios = $servicio->getAll();
-        Core\View::render('servicio/index', ['servicios' => $servicios]);
+        $servicioModel = new Servicio();
+        $servicios = $servicioModel->getAll(); // Trae los servicios de la BD
+        View::render('servicio/index', ['servicios' => $servicios]);
     }
 
     public function create() {
@@ -41,6 +35,7 @@ class ServicioController {
             $servicio = new Servicio();
             $servicio->create($disponibilidad, $categoria, $descripcion, $precio, $titulo, $imagen);
         }
+
         header('Location: index.php?controller=servicio&action=index');
     }
 
@@ -66,6 +61,7 @@ class ServicioController {
             $servicio = new Servicio();
             $servicio->update($id, $disponibilidad, $categoria, $descripcion, $precio, $titulo, $imagen);
         }
+
         header('Location: index.php?controller=servicio&action=index');
     }
 
@@ -75,6 +71,7 @@ class ServicioController {
             $servicio = new Servicio();
             $servicio->delete($id);
         }
+
         header('Location: index.php?controller=servicio&action=index');
     }
 }
