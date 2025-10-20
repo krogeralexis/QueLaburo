@@ -1,0 +1,27 @@
+name: 🚀 Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - main  # o la rama donde trabajes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout del código
+        uses: actions/checkout@v4
+
+      - name: 📤 Subir al hosting por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          server-dir: /htdocs/
+          local-dir: ./code/
+          exclude: |
+            **/.git*
+            **/.github*
