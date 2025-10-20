@@ -2,10 +2,10 @@
 // config/database.php
 
 class Database {
-    private static $host = 'localhost';
-    private static $db = 'queLaburo';
-    private static $user = 'root';
-    private static $pass = 'root';      
+    private static $host = ' sql204.infinityfree.com';
+    private static $db = 'if0_40213381_quelaburo';
+    private static $user = 'if0_40213381';
+    private static $pass = 'H1temJTycUHVo';
     private static $charset = 'utf8mb4';
 
     public static function connect() {
