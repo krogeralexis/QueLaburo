@@ -1,8 +1,8 @@
 <?php
-require_once 'core/Controller.php';
-require_once 'models/Usuario.php';
-require_once 'models/Servicio.php'; // <--- importante, necesitamos el modelo de servicios
-require_once 'core/View.php';
+require_once __DIR__ . '/../core/Controller.php';
+require_once __DIR__ . '/../models/Usuario.php';
+require_once __DIR__ . '/../models/Servicio.php';
+require_once __DIR__ . '/../core/View.php';
 
 class UsuarioController extends \Core\Controller {
 
