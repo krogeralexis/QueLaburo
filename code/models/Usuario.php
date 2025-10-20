@@ -1,8 +1,8 @@
 <?php
 // models/Usuario.php
 require_once __DIR__ . '/../core/Model.php';
-echo "admin";
-class Usuario extends Model 
+
+class Usuario extends \Core\Model 
 {
     /**
      * Devuelve todos los usuarios registrados en la base de datos.
