@@ -1,7 +1,7 @@
 <?php
 // models/Usuario.php
-require_once __DIR__ . '/Model.php';
-
+require_once __DIR__ . '/../core/Model.php';
+echo "admin";
 class Usuario extends Model 
 {
     /**
