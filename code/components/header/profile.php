@@ -16,10 +16,10 @@
       // Opción: Mis reservas (Si es cliente)
       if (isset($es_cliente) && $es_cliente): 
     ?>
-        <a href="\Core\Router::url('cliente/misReservas')">Mis reservas</a>
+        <a href="<?= \Core\Router::url('cliente/misReservas')?>">Mis reservas</a>
     <?php endif; ?>
     
-    <a href="\Core\Router::url('usuario/verPerfil')">Ver perfil</a>
-    <a href="\Core\Router::url('login/logout')">Cerrar sesión</a>
+    <a href="<?= \Core\Router::url('usuario/verPerfil')?>">Ver perfil</a>
+    <a href="<?= \Core\Router::url('login/logout')?>">Cerrar sesión</a>
   </div>
 </div>
