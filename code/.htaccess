@@ -1,11 +1,7 @@
 RewriteEngine On
 RewriteBase /
 
-# Redirige todo a index.php si no es un archivo o carpeta real
+# Redirigir todo a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
-
-# Opcional: redirige URLs antiguas con query string a URLs limpias
-RewriteCond %{THE_REQUEST} \ /index\.php\?controller=([^\&]+)&action=([^\s]+) [NC]
-RewriteRule ^ /%1/%2? [R=301,L]
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
