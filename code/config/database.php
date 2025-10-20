@@ -2,7 +2,7 @@
 // config/database.php
 
 class Database {
-    private static $host = ' sql204.infinityfree.com';
+    private static $host = 'sql204.infinityfree.com';
     private static $db = 'if0_40213381_quelaburo';
     private static $user = 'if0_40213381';
     private static $pass = 'H1temJTycUHVo';
