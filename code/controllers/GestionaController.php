@@ -1,6 +1,6 @@
 <?php
-require_once 'models/Gestiona.php';
-require_once 'core/View.php';
+require_once __DIR__ . '/../models/Gestiona.php';
+require_once __DIR__ . '/../core/View.php';
 
 class GestionaController {
     public function __construct() 

@@ -1,6 +1,6 @@
 <?php
-require_once 'models/Mensaje.php';
-require_once 'core/View.php';
+require_once __DIR__ . '/../models/Mensaje.php';
+require_once __DIR__ . '/../core/View.php';
 
 class MensajeController {
 

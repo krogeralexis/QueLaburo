@@ -1,7 +1,7 @@
 <?php
 // controllers/AdministradorController.php
-require_once 'models/Administrador.php';
-require_once 'core/View.php';
+require_once __DIR__ . '/../models/Administrador.php';
+require_once __DIR__ . '/../core/View.php';
 
 class AdministradorController {
     public function index() {

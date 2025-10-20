@@ -1,6 +1,6 @@
 <?php
-require_once 'models/Reserva.php';
-require_once 'core/View.php';
+require_once __DIR__ . '/../models/Reserva.php';
+require_once __DIR__ . '/../core/View.php';
 
 class ReservaController {
     public function __construct() 

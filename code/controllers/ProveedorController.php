@@ -1,6 +1,6 @@
 <?php
-require_once 'models/Proveedor.php';
-require_once 'core/View.php';
+require_once __DIR__ . '/../models/Proveedor.php';
+require_once __DIR__ . '/../core/View.php';
 
 class ProveedorController {
     public function __construct() 
@@ -22,7 +22,7 @@ class ProveedorController {
     public function index() {
         $proveedor = new Proveedor();
         $proveedores = $proveedor->getAll();
-        Core\View::render('adminPanel/proveedor/index', ['proveedores' => $proveedores]);
+        Core\View::render('proveedor/index', ['proveedores' => $proveedores]);
     }
 
     public function create() {

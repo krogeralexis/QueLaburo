@@ -1,6 +1,6 @@
 <?php
-require_once 'models/Servicio.php';
-require_once 'core/View.php';
+require_once __DIR__ . '/../models/Servicio.php';
+require_once __DIR__ . '/../core/View.php';
 
 class ServicioController {
     public function __construct() {
