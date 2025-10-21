@@ -369,14 +369,14 @@
     gap: 1vw;
   }
 
-  /* Si no hay sesión: ocultar "Iniciar sesión", mostrar solo "Únete" */
-  .auth-actions #btnLogin {
-    display: none !important;
+ #btnLogin {
+    display: none;
   }
 
-  .auth-actions #btnRegister {
-    display: inline-flex !important;
+  .auth-actions {
+    justify-content: flex-end; /* Mantener Únete a la derecha */
   }
+}
 
   /* Perfil y Publicar (cuando hay sesión) */
   .profile-menu-container {
