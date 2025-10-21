@@ -2,25 +2,28 @@
   <div class="auth-modal-content">
     <span class="auth-close">&times;</span>
 
-    <!-- Login -->
+    <!-- LOGIN -->
     <div id="loginContainer">
       <div class="form-container">
         <p class="title">Bienvenido</p>
 
-        <!-- Solo botones inicialmente -->
+        <!-- BOTONES CENTRADOS -->
         <div class="buttons-container" id="loginButtons">
-          <div class="form-btn" id="loginWithMailBtn">Ingresar con mail</div>
+          <div class="form-btn" id="loginWithMailBtn">
+            <img src="css/storage/mailsito.svg" class="icon-left" alt="Mail Icon"/>
+            Ingresar con mail
+          </div>
           <div class="apple-login-button">
-            <img src="css/storage/facebook.svg" alt="Facebook Icon" class="apple-icon"/>
-            <span>Iniciar con Facebook</span>
+            <img src="css/storage/facebook.svg" class="icon-left" alt="Facebook Icon"/>
+            Iniciar con Facebook
           </div>
           <div class="google-login-button">
-            <img src="css/storage/google.svg" alt="Google Icon" class="google-icon"/>
-            <span>Iniciar con Google</span>
+            <img src="css/storage/google.svg" class="icon-left" alt="Google Icon"/>
+            Iniciar con Google
           </div>
         </div>
 
-        <!-- Formulario oculto -->
+        <!-- FORMULARIO OCULTO -->
         <form class="form" id="loginForm" style="display:none;">
           <input type="email" class="input" placeholder="Email" required>
           <input type="password" class="input" placeholder="Contraseña" required>
@@ -34,25 +37,28 @@
       </div>
     </div>
 
-    <!-- Register -->
+    <!-- REGISTER -->
     <div id="registerContainer" style="display:none;">
       <div class="form-container">
         <p class="title">Registro</p>
 
-        <!-- Solo botones inicialmente -->
+        <!-- BOTONES CENTRADOS -->
         <div class="buttons-container" id="registerButtons">
-          <div class="form-btn" id="registerWithMailBtn">Unirse con mail</div>
+          <div class="form-btn" id="registerWithMailBtn">
+            <img src="css/storage/mailsito.svg" class="icon-left" alt="Mail Icon"/>
+            Unirse con mail
+          </div>
           <div class="apple-login-button">
-            <img src="css/storage/facebook.svg" alt="Facebook Icon" class="apple-icon"/>
-            <span>Unirse con Facebook</span>
+            <img src="css/storage/facebook.svg" class="icon-left" alt="Facebook Icon"/>
+            Unirse con Facebook
           </div>
           <div class="google-login-button">
-            <img src="css/storage/google.svg" alt="Google Icon" class="google-icon"/>
-            <span>Unirse con Google</span>
+            <img src="css/storage/google.svg" class="icon-left" alt="Google Icon"/>
+            Unirse con Google
           </div>
         </div>
 
-        <!-- Formulario oculto -->
+        <!-- FORMULARIO OCULTO -->
         <form class="form" id="registerForm" style="display:none;">
           <input type="text" class="input" placeholder="Nombre completo" required>
           <input type="email" class="input" placeholder="Correo electrónico" required>
@@ -67,6 +73,5 @@
         </p>
       </div>
     </div>
-
   </div>
 </div>
