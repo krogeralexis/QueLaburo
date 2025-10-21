@@ -32,7 +32,7 @@
 
 #authModal .form-container {
   width: 350px;
-  height: 500px;
+  height: auto;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 10px;
@@ -99,6 +99,10 @@
   color: white;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* para el icono a la izquierda */
 }
 
 #authModal .form-btn:active {
@@ -111,6 +115,7 @@
   color: #747474;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 
 #authModal .sign-up-link {
@@ -129,7 +134,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center; /* centrado vertical */
+  align-items: center; /* centrado horizontal */
   margin-top: 20px;
   gap: 15px;
 }
@@ -162,9 +168,30 @@
 }
 
 #authModal .apple-icon,
-#authModal .google-icon {
-  width: 20px;
-  height: 20px;
+#authModal .google-icon,
+#authModal .icon-left {
+  width: 1vw;
+  height: 1vh;
   font-size: 18px;
   margin-bottom: 1px;
+}
+
+#authModal .form-btn .icon-left {
+  margin-bottom: 0;
+}
+
+#authModal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#authModal form input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#authModal #loginForm,
+#authModal #registerForm {
+  display: none;
 }
