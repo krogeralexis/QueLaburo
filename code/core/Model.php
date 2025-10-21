@@ -10,9 +10,9 @@ class Model {
     public function __construct() {
         try {
             $this->db = new PDO(
-                'mysql:host=localhost;dbname=queLaburo;charset=utf8mb4',
-                'root',       
-                '',           
+                'mysql:host=sql204.infinityfree.com;dbname=if0_40213381_quelaburo;charset=utf8mb4',
+                'if0_40213381',       
+                'H1temJTycUHVo',           
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
