@@ -14,7 +14,7 @@
   color: inherit;
   cursor: pointer;
   position: relative; /* necesario para centrar el logo */
-}
+} 
 
 /* ==============================
    LOGO
@@ -56,7 +56,7 @@
   align-items: center;
   height: 6vh;
   width: auto;
-  font-size: 2.5vh  ;
+  font-size: 2.5vh;
   gap: 2vw;
   margin: 0;
   padding: 0;
@@ -145,38 +145,6 @@
   object-fit: cover;
 }
 
-
-/* ==============================
-   RESPONSIVE
-============================== */
-@media (max-width: 768px) {
-  .header {
-    grid-template-columns: 1fr; /* todo en una sola columna */
-    padding: 2vh 4vw;
-    height: auto;
-    gap: 2vh;
-  }
-
-  .nav-left ul,
-  .auth-actions {
-    flex-direction: column;
-    gap: 1.2vh;
-  }
-
-  .nav-right {
-    flex-direction: column;
-    gap: 2vh;
-  }
-
-  .logo-text h1 {
-    font-size: 3vh;
-  }
-
-  .logo-text span {
-    font-size: 1.6vh;
-  }
-}
-
 /* ==============================
    PROFILE MENU (desplegable)
 ============================== */
@@ -200,7 +168,6 @@
   transition: box-shadow 0.2s ease-in-out;
 }
 
-/* Menú desplegable */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -218,7 +185,6 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* Enlaces dentro del menú */
 .dropdown-menu a {
   display: block;
   padding: 1.2vh 1.5vw;
@@ -231,13 +197,11 @@
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-/* Hover */
 .dropdown-menu a:hover {
   background: #F2F4F8;
   color: #000000 !important;
 }
 
-/* Mostrar menú */
 .dropdown-menu.show {
   display: block;
   opacity: 1;
@@ -262,14 +226,12 @@
 .campanita__bell {
   width: 100px;
   position: relative;
-  /* cursor: pointer; */
 }
 
 .campanita-icon__circle {
   position: absolute;
   left: 38%;
   bottom: -5%;
-
   height: 15px;
   width: 30px;
   background: #4C5158;
@@ -296,12 +258,10 @@
     transform: scale(0.85);
     box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
   }
-
   70% {
     transform: scale(1);
     box-shadow: 0 0 0 25px rgba(255, 82, 82, 0);
   }
-
   100% {
     transform: scale(0.85);
     box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
@@ -309,7 +269,7 @@
 }
 
 /* ==============================
-   HEADER MOBILE
+   RESPONSIVE MOBILE
 ============================== */
 @media (max-width: 768px) {
   .header {
@@ -343,7 +303,7 @@
     font-size: 1.6vh;
   }
 
-  /* Navegación izquierda: solo "Explora" */
+  /* Nav left: solo primer item */
   .nav-left {
     flex: 1;
     display: flex;
@@ -361,7 +321,7 @@
     display: none;
   }
 
-  /* Navegación derecha */
+  /* Nav right */
   .nav-right {
     flex: 1;
     display: flex;
@@ -370,23 +330,22 @@
     gap: 1vw;
   }
 
- #btnLogin {
-    display: none;
+  #btnLogin {
+    display: none; /* esconder "Iniciar sesión" */
   }
 
   .auth-actions {
-    justify-content: flex-end; /* Mantener Únete a la derecha */
+    justify-content: flex-end;
   }
 
+  /* Perfil y Publicar */
+  .btn-primary {
+    order: 1; /* Publicar antes del perfil */
+  }
 
-  /* Perfil y Publicar (cuando hay sesión) */
   .profile-menu-container {
     order: 2;
     position: relative;
-  }
-
-  .btn-primary {
-    order: 1; /* Publicar antes del perfil */
   }
 
   .usr-img {
@@ -394,7 +353,7 @@
     height: 6vh;
   }
 
-  /* Ajuste de dropdown menú */
+  /* Dropdown ajuste mobile */
   .dropdown-menu {
     min-width: 50vw;
     right: 0;
