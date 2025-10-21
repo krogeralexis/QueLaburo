@@ -376,7 +376,7 @@
   .auth-actions {
     justify-content: flex-end; /* Mantener Únete a la derecha */
   }
-}
+
 
   /* Perfil y Publicar (cuando hay sesión) */
   .profile-menu-container {
