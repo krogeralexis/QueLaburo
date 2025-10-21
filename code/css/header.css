@@ -10,11 +10,11 @@
   border-bottom: 0.1vh solid #21272A;
   background: #FFFFFF;
   gap: 1vw;
+  text-decoration: none;
   color: inherit;
   cursor: pointer;
   position: relative; /* necesario para centrar el logo */
-  text-decoration: none;
-}
+} 
 
 /* ==============================
    LOGO
@@ -26,6 +26,11 @@
   gap: 1vw;
   max-height: 100%;
   text-align: center;
+  position: absolute; /* agregado para centrar */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* centra perfecto */
+  pointer-events: none; /* no bloquea clicks de nav */
 }
 
 .logo-image {
@@ -60,6 +65,7 @@
   gap: 2vw;
   margin: 0;
   padding: 0;
+  z-index: 100; /* encima del logo si necesario */
 }
 
 .nav-left .nav-link {
@@ -91,10 +97,11 @@
   align-items: center;
   gap: 2vw;
   font-size: 2vh;
+  z-index: 100; /* encima del logo si necesario */
 }
 
 /* ==============================
-   AUTH ACTIONS
+   AUTH ACTIONS (Iniciar sesión / Únete)
 ============================== */
 .auth-actions {
   display: flex;
@@ -146,7 +153,7 @@
 }
 
 /* ==============================
-   PROFILE MENU
+   PROFILE MENU (desplegable)
 ============================== */
 .profile-menu-container {
   position: relative;
@@ -209,27 +216,87 @@
 }
 
 /* ==============================
-   HAMBURGER MOBILE
+   CAMPANITA DE NOTIFICACIONES
 ============================== */
-.hamburger {
-  display: none;
+.container__campanita {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.campanita__content {
+  /* Aquí puedes agregar estilos si necesitas */
+}
+
+.campanita__bell {
+  width: 100px;
+  position: relative;
+}
+
+.campanita-icon__circle {
+  position: absolute;
+  left: 38%;
+  bottom: -5%;
+  height: 15px;
+  width: 30px;
+  background: #4C5158;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.notification {
+  background: rgba(255, 82, 82, 1);
+  position: absolute;
+  right: 5px;
+  top: 6px;
+  z-index: 2;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  transform: scale(1);
+  box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.85);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 25px rgba(255, 82, 82, 0);
+  }
+  100% {
+    transform: scale(0.85);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
+}
+
+/* ==============================
+   RESPONSIVE MOBILE
+============================== */
 @media (max-width: 768px) {
-  /* HEADER */
   .header {
     height: 10vh;
+    display: fixed;
+    justify-content: space-between;
+    align-items: center;
     padding: 2vh 4vw;
+    position: relative;
     gap: 1vw;
   }
 
-  /* LOGO CENTRADO */
+  /* Logo centrado */
   .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
+    /* ya centrado con absolute + transform */
+  }
+
+  .logo-image {
+    height: 4vh;
+    width: auto;
   }
 
   .logo-text h1 {
@@ -240,50 +307,25 @@
     font-size: 1.6vh;
   }
 
-  /* NAV LEFT MOBILE */
+  /* Nav left: solo primer item */
   .nav-left {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 70%;
-    max-width: 300px;
-    background: #ffffff;
-    flex-direction: column;
-    padding: 10vh 2vw 2vh 2vw; /* debajo del header */
-    gap: 2vh;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 999;
-  }
-
-  .nav-left.show {
-    transform: translateX(0);
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
 
   .nav-left ul {
-    flex-direction: column;
-    gap: 2vh;
+    display: flex;
+    gap: 2vw;
+    margin: 0;
+    padding: 0;
   }
 
-  .nav-left ul li:not(.mobile-only) {
+  .nav-left ul li:not(:first-child) {
     display: none;
   }
 
-  .mobile-only {
-    display: block;
-  }
-
-  .hamburger {
-    display: block;
-  }
-
-  .hamburger img {
-    height: 6vh;
-    width: auto;
-  }
-
-  /* NAV RIGHT */
+  /* Nav right */
   .nav-right {
     flex: 1;
     display: flex;
@@ -293,15 +335,16 @@
   }
 
   #btnLogin {
-    display: none;
+    display: none; /* esconder "Iniciar sesión" */
   }
 
   .auth-actions {
     justify-content: flex-end;
   }
 
+  /* Perfil y Publicar */
   .btn-primary {
-    order: 1;
+    order: 1; /* Publicar antes del perfil */
   }
 
   .profile-menu-container {
@@ -314,6 +357,7 @@
     height: 6vh;
   }
 
+  /* Dropdown ajuste mobile */
   .dropdown-menu {
     min-width: 50vw;
     right: 0;
