@@ -275,6 +275,100 @@
   }
 }
 
+.hamburger img,
+.ham-img {
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 /* ==============================
    RESPONSIVE MOBILE
 ============================== */
+@media (max-width: 768px) {
+  .header {
+    height: 10vh;
+    display: fixed;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 4vw;
+    position: relative;
+    gap: 1vw;
+  }
+
+  /* Logo centrado */
+  .logo {
+    /* ya centrado con absolute + transform */
+  }
+
+  .logo-image {
+    height: 4vh;
+    width: auto;
+  }
+
+  .logo-text h1 {
+    font-size: 3vh;
+  }
+
+  .logo-text span {
+    font-size: 1.6vh;
+  }
+
+  /* Nav left: solo primer item */
+  .nav-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-left ul {
+    display: flex;
+    gap: 2vw;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-left ul li:not(:first-child) {
+    display: none;
+  }
+
+  /* Nav right */
+  .nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1vw;
+  }
+
+  #btnLogin {
+    display: none; /* esconder "Iniciar sesión" */
+  }
+
+  .auth-actions {
+    justify-content: flex-end;
+  }
+
+  /* Perfil y Publicar */
+  .btn-primary {
+    order: 1; /* Publicar antes del perfil */
+  }
+
+  .profile-menu-container {
+    order: 2;
+    position: relative;
+  }
+
+  .usr-img {
+    width: 6vh;
+    height: 6vh;
+  }
+
+  /* Dropdown ajuste mobile */
+  .dropdown-menu {
+    min-width: 50vw;
+    right: 0;
+    left: auto;
+  }
+}
