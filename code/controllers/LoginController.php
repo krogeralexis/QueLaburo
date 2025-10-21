@@ -75,9 +75,10 @@ class LoginController
         }
     }
     public function registerview() 
-    {
-        require 'views/login/register.php';
-    }
+{
+    header('Location: index.php?controller=usuario&action=index&mode=register');
+    exit;
+}
     public function register() 
 {
      if ($_SERVER['REQUEST_METHOD'] === 'POST') 
@@ -137,12 +138,12 @@ class LoginController
             exit;
         } else {
             // Mostrar errores
-            require 'views/login/register.php';
+            require 'views/login/login.php';
         }
     }   else 
         {
             // Si no es POST, solo mostrar formulario
-            require 'views/login/register.php';
+            require 'views/login/login.php';
         }   
 }
 

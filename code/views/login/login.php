@@ -1,32 +1,47 @@
-<!-- Enlace al CSS del header -->
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/form-login.css">
-<link rel="stylesheet" href="css/styles.css">
+<!-- components/modal-login.php -->
+<div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+        <span class="auth-close">&times;</span>
 
-<?php include 'components/header.php'; ?>
+        <!-- Contenedor Login -->
+        <div id="loginContainer">
+            <p class="title">Welcome back</p>
+            <form class="form" id="emailLoginForm" action="/login" method="POST">
+                <input type="email" class="input" placeholder="Email" name="email" required>
+                <input type="password" class="input" placeholder="Password" name="password" required>
+                <p class="page-link">
+                    <span class="page-link-label">Forgot Password?</span>
+                </p>
+                <button class="form-btn" type="submit">Log in</button>
+            </form>
+            <p class="sign-up-label">
+                Don't have an account?<span class="sign-up-link" id="switchToRegister">Sign up</span>
+            </p>
+            <div class="buttons-container">
+                <div class="apple-login-button">
+                    <!-- SVG Apple -->
+                    <span>Log in with Apple</span>
+                </div>
+                <div class="google-login-button">
+                    <!-- SVG Google o Facebook -->
+                    <span>Log in with Google</span>
+                </div>
+            </div>
+        </div>
 
-<main class="login-container">
-  <form class="login-form" action="index.php?controller=login&action=authenticate" method="POST" autocomplete="off">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="correo" placeholder="Email" required>
+        <!-- Contenedor Registro -->
+        <div id="registerContainer" style="display:none;">
+            <p class="title">Create account</p>
+            <form class="form" id="registerForm" action="/register" method="POST">
+                <input type="text" class="input" placeholder="Name" name="name" required>
+                <input type="email" class="input" placeholder="Email" name="email" required>
+                <input type="password" class="input" placeholder="Password" name="password" required>
+                <button class="form-btn" type="submit">Register</button>
+            </form>
+            <p class="sign-up-label">
+                Already have an account? <span class="sign-up-link" id="switchToLogin">Log in</span>
+            </p>
+        </div>
 
-    <label for="password">Contraseña</label>
-    <input type="password" id="password" name="password" placeholder="Contraseña" required>
-
-    <div class="form-options">
-      <label><input type="checkbox" name="remember"> Recordarme</label>
-      <a href="#">¿Olvidaste la contraseña?</a>
     </div>
-
-    <button type="submit" class="btn">Log In</button>
-
-    <p class="signup-text">
-      ¿No tiene cuenta? <a href="index.php?controller=login&action=registerview">Cree una aquí</a>
-      </p>
-
-  </form>
-</main>
-
-<?php include 'components/footer.php'; ?>
+</div>

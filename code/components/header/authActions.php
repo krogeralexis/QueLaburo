@@ -1,4 +1,4 @@
 <div class="auth-actions">
-  <a href="index.php?controller=login&action=index" class="btn">Iniciar sesión</a>
-  <a href="index.php?controller=login&action=register" class="btn btn-primary">Únete</a>
+  <a href="#" class="btn" id="btnLogin">Iniciar sesión</a>
+  <a href="#" class="btn btn-primary" id="btnRegister">Únete</a>
 </div>

@@ -49,6 +49,7 @@ if ($usuario_esta_logeado) {
 
           // 2. Menú de Perfil
           // profile.php usa $es_proveedor y $es_cliente para mostrar las opciones.
+          require 'header/campanita.php';
           require 'header/profile.php'; 
       } else {
           // 3. Acciones de Autenticación (si no está logeado)
