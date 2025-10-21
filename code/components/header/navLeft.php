@@ -8,7 +8,7 @@ $usuario_esta_logeado = isset($_SESSION['usuario']['id']);
     <!-- Solo se ve en mobile -->
     <li class="mobile-only">
       <a href="css/storage/hamburgesita.svg" class="hamburger" aria-label="Abrir menú" id="menuToggle">
-        <img src="css/storage/hamburgesita.svg" alt="Menú" style="height: 6vh; width: 6vh;">
+        <img src="css/storage/hamburgesita.svg" alt="Menú" style="height: 6vh; width: auto;">
       </a>
     </li>
 
