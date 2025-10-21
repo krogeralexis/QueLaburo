@@ -8,10 +8,10 @@ $usuario_esta_logeado = isset($_SESSION['usuario']['id']);
     <!-- Solo se ve en mobile -->
     <li class="mobile-only">
       <a href="css/storage/hamburgesita.svg" class="hamburger" aria-label="Abrir menú">
-        <img src="css/storage/hamburgesita.svg" alt="Menú" style="height: 6vh; width: auto;">
+        <img src="css/storage/hamburgesita.svg" alt="Menú" style="height: 6vh; width: 6vh;">
       </a>
     </li>
-   
+    <li><a href="index.php?controller=proveedor&action=index" class="nav-link">Panel de Administrador</a></li>
     <li>
       <a href="#" class="nav-link">
         Explora
