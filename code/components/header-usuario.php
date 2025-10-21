@@ -1,60 +1,53 @@
 <?php
-// Ya que index.php llama a session_start(), $_SESSION está disponible aquí.
-
-// 🟢 LÓGICA CORREGIDA DE SESIÓN Y ROL (usa booleanos de la sesión) 🟢
 $usuario_esta_logeado = isset($_SESSION['usuario']['id']); 
-
-$es_proveedor = false;
-$es_cliente = false;
-
-if ($usuario_esta_logeado) {
-    // RECUPERAMOS LOS VALORES BOOLEANOS GUARDADOS EN EL CONTROLADOR.
-    // Usamos '?? false' para asegurarnos de que siempre sea un booleano si la clave no existe.
-    $es_proveedor = $_SESSION['usuario']['es_proveedor'] ?? false;
-    $es_cliente = $_SESSION['usuario']['es_cliente'] ?? false;
-}
-
-// ----------------------------------------------------------------------
-// Puedes COMENTAR el var_dump anterior si ya no lo necesitas, o dejarlo aquí.
-/*
-if ($usuario_esta_logeado) {
-    echo '<pre style="background: #fdd; padding: 10px; border: 1px solid red;">';
-    echo 'DEBUG DE SESIÓN (SOLO PARA LOGEADOS):<br>';
-    var_dump($_SESSION['usuario']);
-    echo 'Estado de Cliente ($es_cliente): ' . ($es_cliente ? 'TRUE' : 'FALSE') . '<br>';
-    echo 'Estado de Proveedor ($es_proveedor): ' . ($es_proveedor ? 'TRUE' : 'FALSE') . '<br>';
-    echo '</pre>';
-}
-*/
-// ----------------------------------------------------------------------
+$es_proveedor = $usuario_esta_logeado ? ($_SESSION['usuario']['es_proveedor'] ?? false) : false;
+$es_cliente = $usuario_esta_logeado ? ($_SESSION['usuario']['es_cliente'] ?? false) : false;
 ?>
 <header class="header">
+  <!-- NAV LEFT -->
   <nav class="nav-left">
-    <?php require_once 'header/navLeft.php'; ?>
+    <ul>
+      <li><a href="#" class="nav-link">Explora</a></li>
+    </ul>
   </nav>
 
+  <!-- LOGO -->
   <div class="logo">
-    <?php require_once 'header/logo.php'; ?>
+    <a href="index.php" aria-label="Ir al inicio">
+      <img src="css/storage/Rectangulito.svg" alt="QueLaburo logo" class="logo-image">
+      <div class="logo-text">
+        <h1>QueLaburo</h1>
+        <span>by AlfaCod</span>
+      </div>
+    </a>
   </div>
 
+  <!-- NAV RIGHT -->
   <div class="nav-right">
-    <?php 
-      
-      if ($usuario_esta_logeado) {
-          
-          // 1. Botón "Publicar servicio" (si $es_proveedor es TRUE)
-          if ($es_proveedor) {
-              echo '<a href="index.php?controller=servicio&action=publicar" class="btn-primary">Publicar servicio</a>';
-          }
-
-          // 2. Menú de Perfil
-          // profile.php usa $es_proveedor y $es_cliente para mostrar las opciones.
-          require 'header/campanita.php';
-          require 'header/profile.php'; 
-      } else {
-          // 3. Acciones de Autenticación (si no está logeado)
-          require 'header/authActions.php';
-      }
-    ?>
+    <?php if ($usuario_esta_logeado): ?>
+        <?php if ($es_proveedor): ?>
+          <a href="index.php?controller=servicio&action=publicar" class="btn-primary">Publicar</a>
+        <?php endif; ?>
+        <div class="profile-menu-container">
+          <button class="profile-btn" id="profileBtn">
+            <img src="css/storage/userThumb.svg" alt="Perfil" class="usr-img"> 
+          </button>
+          <div class="dropdown-menu" id="dropdownMenu">
+            <?php if ($es_proveedor): ?>
+              <a href="index.php?controller=proveedor&action=misServicios">Mis servicios</a>
+            <?php endif; ?>
+            <?php if ($es_cliente): ?>
+              <a href="index.php?controller=cliente&action=misReservas">Mis reservas</a>
+            <?php endif; ?>
+            <a href="index.php?controller=usuario&action=verPerfil">Ver perfil</a>
+            <a href="index.php?controller=login&action=logout">Cerrar sesión</a>
+          </div>
+        </div>
+    <?php else: ?>
+        <div class="auth-actions">
+          <a href="#" class="btn" id="btnLogin">Iniciar sesión</a>
+          <a href="#" class="btn btn-primary" id="btnRegister">Únete</a>
+        </div>
+    <?php endif; ?>
   </div>
 </header>
