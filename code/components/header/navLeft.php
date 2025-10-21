@@ -11,7 +11,7 @@ $usuario_esta_logeado = isset($_SESSION['usuario']['id']);
         <img src="css/storage/hamburgesita.svg" alt="Menú" style="height: 6vh; width: auto;">
       </a>
     </li>
-    <li><a href="index.php?controller=proveedor&action=index" class="nav-link">Panel de Administrador</a></li>
+   
     <li>
       <a href="#" class="nav-link">
         Explora
