@@ -1,14 +1,18 @@
 const modal = document.getElementById("authModal");
+
+// Contenedores
 const loginContainer = document.getElementById("loginContainer");
 const registerContainer = document.getElementById("registerContainer");
 
+// Botones y formularios
 const loginWithMailBtn = document.getElementById("loginWithMailBtn");
 const registerWithMailBtn = document.getElementById("registerWithMailBtn");
 
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
-const loginInitial = document.getElementById("loginInitial");
-const registerInitial = document.getElementById("registerInitial");
+
+const loginButtons = document.getElementById("loginButtons");
+const registerButtons = document.getElementById("registerButtons");
 
 // Abrir modal
 function openAuthModal(mode = 'login') {
@@ -16,13 +20,13 @@ function openAuthModal(mode = 'login') {
     if (mode === 'login') {
         loginContainer.style.display = 'block';
         registerContainer.style.display = 'none';
+        loginButtons.style.display = 'flex';
         loginForm.style.display = 'none';
-        loginInitial.style.display = 'block';
     } else {
         loginContainer.style.display = 'none';
         registerContainer.style.display = 'block';
+        registerButtons.style.display = 'flex';
         registerForm.style.display = 'none';
-        registerInitial.style.display = 'block';
     }
 }
 
@@ -30,26 +34,25 @@ function openAuthModal(mode = 'login') {
 document.querySelector(".auth-close").onclick = () => modal.style.display = 'none';
 window.onclick = e => { if(e.target == modal) modal.style.display = 'none'; }
 
-// Switch modal
+// Switch entre login y registro
 document.getElementById("toRegister").onclick = () => openAuthModal('register');
 document.getElementById("toLogin").onclick = () => openAuthModal('login');
 
-// Botón "Ingresar con mail"
+// Mostrar formulario al hacer clic en "Ingresar/Unirse con mail"
 loginWithMailBtn.onclick = () => {
-    loginInitial.style.display = 'none';
+    loginButtons.style.display = 'none';
     loginForm.style.display = 'flex';
 };
 
 registerWithMailBtn.onclick = () => {
-    registerInitial.style.display = 'none';
+    registerButtons.style.display = 'none';
     registerForm.style.display = 'flex';
 };
 
-// Validación de contraseña en registro
+// Validación de contraseñas en registro
 registerForm.addEventListener('submit', function(e) {
     const password = this.querySelector('input[placeholder="Contraseña"]').value;
     const confirm = this.querySelector('input[placeholder="Confirmar contraseña"]').value;
-
     if (password !== confirm) {
         e.preventDefault();
         alert('Las contraseñas no coinciden.');

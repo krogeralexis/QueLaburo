@@ -5,11 +5,19 @@
     <!-- Login -->
     <div id="loginContainer">
       <div class="form-container">
-        <p class="title" id="loginTitle">Bienvenido</p>
+        <p class="title">Bienvenido</p>
 
-        <!-- Botón inicial -->
-        <div id="loginInitial">
+        <!-- Solo botones inicialmente -->
+        <div class="buttons-container" id="loginButtons">
           <div class="form-btn" id="loginWithMailBtn">Ingresar con mail</div>
+          <div class="apple-login-button">
+            <img src="css/storage/facebook.svg" alt="Facebook Icon" class="apple-icon"/>
+            <span>Iniciar con Facebook</span>
+          </div>
+          <div class="google-login-button">
+            <img src="css/storage/google.svg" alt="Google Icon" class="google-icon"/>
+            <span>Iniciar con Google</span>
+          </div>
         </div>
 
         <!-- Formulario oculto -->
@@ -23,28 +31,25 @@
         <p class="sign-up-label">
           ¿No tenés una cuenta? <span class="sign-up-link" id="toRegister">Unirse</span>
         </p>
-
-        <div class="buttons-container">
-          <div class="apple-login-button">
-            <img src="css/storage/facebook.svg" alt="Facebook Icon" class="apple-icon"/>
-            <span>Iniciar con Facebook</span>
-          </div>
-          <div class="google-login-button">
-            <img src="css/storage/google.svg" alt="Google Icon" class="google-icon"/>
-            <span>Iniciar con Google</span>
-          </div>
-        </div>
       </div>
     </div>
 
     <!-- Register -->
     <div id="registerContainer" style="display:none;">
       <div class="form-container">
-        <p class="title" id="registerTitle">Registro</p>
+        <p class="title">Registro</p>
 
-        <!-- Botón inicial -->
-        <div id="registerInitial">
+        <!-- Solo botones inicialmente -->
+        <div class="buttons-container" id="registerButtons">
           <div class="form-btn" id="registerWithMailBtn">Unirse con mail</div>
+          <div class="apple-login-button">
+            <img src="css/storage/facebook.svg" alt="Facebook Icon" class="apple-icon"/>
+            <span>Unirse con Facebook</span>
+          </div>
+          <div class="google-login-button">
+            <img src="css/storage/google.svg" alt="Google Icon" class="google-icon"/>
+            <span>Unirse con Google</span>
+          </div>
         </div>
 
         <!-- Formulario oculto -->
@@ -60,17 +65,6 @@
         <p class="sign-up-label">
           ¿Ya tienes una cuenta? <span class="sign-up-link" id="toLogin">Iniciar Sesión</span>
         </p>
-
-        <div class="buttons-container">
-          <div class="apple-login-button">
-            <img src="css/storage/facebook.svg" alt="Facebook Icon" class="apple-icon"/>
-            <span>Unirse con Facebook</span>
-          </div>
-          <div class="google-login-button">
-            <img src="css/storage/google.svg" alt="Google Icon" class="google-icon"/>
-            <span>Unirse con Google</span>
-          </div>
-        </div>
       </div>
     </div>
 
