@@ -2,17 +2,18 @@
    HEADER LAYOUT
 ============================== */
 .header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr; /* izquierda - centro - derecha */
+  display: flex;
+  justify-content: space-between; /* izquierda - centro - derecha */
   align-items: center;
   height: 10vh;
   padding: 0 4vw;
   border-bottom: 0.1vh solid #21272A;
   background: #FFFFFF;
   gap: 1vw;
-  text-decoration: none; /* quita el subrayado */
-  color: inherit;        /* mantiene el color del texto */
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
+  position: relative; /* necesario para centrar el logo */
 }
 
 /* ==============================
