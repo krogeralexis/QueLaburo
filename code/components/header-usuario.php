@@ -5,7 +5,9 @@ $es_cliente = $usuario_esta_logeado ? ($_SESSION['usuario']['es_cliente'] ?? fal
 ?>
 <header class="header">
   <!-- HAMBURGER MOBILE -->
-  <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú"></button>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
+    <img src="css/storage/hamburguesita.svg" alt="..." class="ham-img">
+  </button>
 
   <!-- NAV LEFT -->
   <nav class="nav-left" id="mobileNav">
