@@ -273,6 +273,7 @@
 ============================== */
 @media (max-width: 768px) {
   .header {
+    height: 10vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
