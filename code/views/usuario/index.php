@@ -24,5 +24,6 @@
   <script src="js/filtrito.js"></script>
   <script src="js/header/campanita.js"></script>
   <script src="js/login.js"></script>
+  <script src="js/header"></script>
 </body>
 </html>
