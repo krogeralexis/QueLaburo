@@ -1,13 +1,12 @@
-<?php
-$usuario_esta_logeado = isset($_SESSION['usuario']['id']); 
-$es_proveedor = $usuario_esta_logeado ? ($_SESSION['usuario']['es_proveedor'] ?? false) : false;
-$es_cliente = $usuario_esta_logeado ? ($_SESSION['usuario']['es_cliente'] ?? false) : false;
-?>
 <header class="header">
+  <!-- HAMBURGER MOBILE -->
+  <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú"></button>
+
   <!-- NAV LEFT -->
-  <nav class="nav-left">
+  <nav class="nav-left" id="mobileNav">
     <ul>
       <li><a href="#" class="nav-link">Explora</a></li>
+      <!-- puedes agregar más items si quieres que aparezcan en mobile -->
     </ul>
   </nav>
 
