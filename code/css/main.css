@@ -220,3 +220,100 @@
     width: 50vw;
   }
 }
+
+/* ==============================
+   MOBILE OPTIMIZATIONS
+============================== */
+@media (max-width: 480px) {
+  /* Main background */
+  main {
+    background-attachment: scroll; /* evita problemas con fixed en móviles */
+  }
+
+  /* SEARCH BAR */
+  .search-bar {
+    width: 90vw;
+    height: auto;
+    flex-direction: column;
+    padding: 1vh 2vw;
+    gap: 1vh;
+    font-size: 2vh;
+  }
+
+  .search-bar input {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .filter-wrapper {
+    width: 100%;
+  }
+
+  .filter-btn {
+    width: 100%;
+    padding: 1vh;
+    font-size: 1.5vh;
+  }
+
+  .filter-dropdown {
+    width: 90%;
+    right: 5%;
+    font-size: 1.8vh;
+  }
+
+  /* CARRUSEL */
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    margin: 2vh 0;
+  }
+
+  .carousel-wrapper {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .card {
+    width: 90%;
+    height: auto;
+  }
+
+  .card-img {
+    height: 40vw; /* ajusta proporción de la imagen */
+  }
+
+  .card-body {
+    padding: 2vh 3vw;
+    gap: 1vh;
+  }
+
+  .profile {
+    gap: 2vw;
+  }
+
+  .profile-icon {
+    width: 12vw;
+    height: 12vw;
+  }
+
+  .name, .category, .title, .description {
+    font-size: 2vh;
+  }
+
+  .card-buttons {
+    flex-direction: column;
+    gap: 1vh;
+  }
+
+  .main-btn {
+    font-size: 2vh;
+    padding: 1.5vh 0;
+  }
+
+  .arrow {
+    display: none; /* ocultar flechas en móvil */
+  }
+}
