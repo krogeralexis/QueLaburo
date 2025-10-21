@@ -308,7 +308,7 @@
 }
 
 /* ==============================
-   HEADER LAYOUT (RESPONSIVE COMPLETO)
+   HEADER MOBILE
 ============================== */
 @media (max-width: 768px) {
   .header {
@@ -316,7 +316,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 2vh 4vw;
-    height: auto;
     position: relative;
     gap: 1vw;
   }
@@ -343,7 +342,7 @@
     font-size: 1.6vh;
   }
 
-  /* Navegación izquierda */
+  /* Navegación izquierda: solo "Explora" */
   .nav-left {
     flex: 1;
     display: flex;
@@ -357,7 +356,6 @@
     padding: 0;
   }
 
-  /* Solo mostrar "Explora" */
   .nav-left ul li:not(:first-child) {
     display: none;
   }
@@ -371,15 +369,23 @@
     gap: 1vw;
   }
 
-  /* Botón Publicar (si es proveedor) antes del perfil */
-  .btn-primary {
-    order: 1;
+  /* Si no hay sesión: ocultar "Iniciar sesión", mostrar solo "Únete" */
+  .auth-actions #btnLogin {
+    display: none !important;
   }
 
-  /* Perfil */
+  .auth-actions #btnRegister {
+    display: inline-flex !important;
+  }
+
+  /* Perfil y Publicar (cuando hay sesión) */
   .profile-menu-container {
     order: 2;
     position: relative;
+  }
+
+  .btn-primary {
+    order: 1; /* Publicar antes del perfil */
   }
 
   .usr-img {
@@ -387,20 +393,7 @@
     height: 6vh;
   }
 
-  /* Acciones de auth (si no está logueado) */
-  .auth-actions {
-    display: flex;
-    gap: 1vw;
-    flex-direction: row;
-  }
-
-  .btn, .btn-primary {
-    font-size: 2vh;
-    padding: 1vh 2vw;
-    height: auto;
-  }
-
-  /* Dropdown menú perfil */
+  /* Ajuste de dropdown menú */
   .dropdown-menu {
     min-width: 50vw;
     right: 0;
