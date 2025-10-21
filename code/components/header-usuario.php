@@ -1,3 +1,8 @@
+<?php
+$usuario_esta_logeado = isset($_SESSION['usuario']['id']); 
+$es_proveedor = $usuario_esta_logeado ? ($_SESSION['usuario']['es_proveedor'] ?? false) : false;
+$es_cliente = $usuario_esta_logeado ? ($_SESSION['usuario']['es_cliente'] ?? false) : false;
+?>
 <header class="header">
   <!-- HAMBURGER MOBILE -->
   <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú"></button>
