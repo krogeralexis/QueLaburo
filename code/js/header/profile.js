@@ -1,17 +1,14 @@
-// Función para mostrar el menú de perfil
-function showProfileMenu() {
-  const profileBtn = document.getElementById('profileBtn');
-  const dropdownMenu = document.getElementById('dropdownMenu');
+// profile.js
+const profileBtn = document.getElementById('profileBtn');
+const dropdownMenu = document.getElementById('dropdownMenu');
+const toggleTheme = document.getElementById('toggleTheme');
 
-  if (!profileBtn || !dropdownMenu) return;
-
-  // Alternar visibilidad al hacer clic en el botón
+if (profileBtn && dropdownMenu) {
   profileBtn.addEventListener('click', (event) => {
     event.stopPropagation();
     dropdownMenu.classList.toggle('show');
   });
 
-  // Cerrar el menú al hacer clic fuera
   window.addEventListener('click', (e) => {
     if (!profileBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
       dropdownMenu.classList.remove('show');
@@ -19,5 +16,9 @@ function showProfileMenu() {
   });
 }
 
-// Ejecutar la función cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', showProfileMenu);
+// Toggle día/noche
+if (toggleTheme) {
+  toggleTheme.addEventListener('change', () => {
+    document.body.classList.toggle('dark-theme');
+  });
+}
