@@ -10,11 +10,54 @@ class LoginController
         $this->usuarioModel = new Usuario();
     }
 
-   public function index($error = '') {
-    require 'views/login/login.php';
-}
-    
+    public function index($error = '') {
+        require 'views/login/login.php';
+    }
 
+    // =========================================================
+    // LOGIN CON GOOGLE
+    // =========================================================
+    public function googleLogin()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $correo = $_POST['correo'] ?? '';
+            $nombre = $_POST['nombre'] ?? '';
+            $google_uid = $_POST['google_uid'] ?? '';
+
+            if (!$correo || !$nombre || !$google_uid) {
+                echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
+                return;
+            }
+
+            $user = $this->usuarioModel->getByEmail($correo);
+
+            if (!$user) {
+                // Usuario nuevo, creamos con contraseña random y UID de Google
+                $passwordRandom = password_hash(bin2hex(random_bytes(5)), PASSWORD_DEFAULT);
+                $this->usuarioModel->create($nombre, $correo, '000000000', $passwordRandom, $google_uid);
+                $user = $this->usuarioModel->getByEmail($correo);
+            } else {
+                // Usuario existente: aseguramos que su google_uid esté registrado
+                if (empty($user['google_uid'])) {
+                    $this->usuarioModel->setGoogleUid($user['id'], $google_uid);
+                }
+            }
+
+            $_SESSION['usuario'] = [
+                'id' => $user['id'],
+                'nombre' => $user['nombre'],
+                'correo' => $user['correo'],
+                'es_cliente' => $this->usuarioModel->esCliente($user['id']),
+                'es_proveedor' => $this->usuarioModel->esProveedor($user['id'])
+            ];
+
+            echo json_encode(['success' => true]);
+        }
+    }
+
+    // =========================================================
+    // LOGIN NORMAL
+    // =========================================================
     public function authenticate() 
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
@@ -22,7 +65,6 @@ class LoginController
             $correo = $_POST['correo'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            // ... (Lógica de validación SQLi - SIN CAMBIOS) ...
             $sqli_patterns = [
                 '/(\bor\b|\band\b)\s+\d+=\d+/i', 
                 '/(\'|")\s*--/', 
@@ -44,7 +86,7 @@ class LoginController
 
             if ($sqli_detected) {
                 $error = "Intento de inyección SQL detectado.";
-                require 'views/login/index.php';
+                require 'views/login/login.php';
                 return;
             }
 
@@ -52,14 +94,10 @@ class LoginController
 
             if ($user) 
             {   
-                $es_cliente = $this->usuarioModel->esCliente($usuario_id);
-                $es_proveedor = $this->usuarioModel->esProveedor($usuario_id);
-                // El array $user ahora incluye 'es_cliente' y 'es_proveedor' gracias al modelo.
                 $_SESSION['usuario'] = [
-                    'id'           => $user['id'], // Usamos 'id' de la tabla Usuario
+                    'id'           => $user['id'],
                     'nombre'       => $user['nombre'],
                     'correo'       => $user['correo'],
-                    // NUEVO: Guardamos los roles en la sesión
                     'es_cliente'   => $user['es_cliente'],
                     'es_proveedor' => $user['es_proveedor']
                 ];
@@ -70,84 +108,72 @@ class LoginController
             else 
             {
                 $error = "Correo o contraseña incorrectos";
-                require 'views/login/index.php';
+                require 'views/login/login.php';
             }
         }
     }
+
+    // =========================================================
+    // REGISTRO
+    // =========================================================
     public function registerview() 
-{
-    header('Location: index.php?controller=usuario&action=index&mode=register');
-    exit;
-}
-    public function register() 
-{
-     if ($_SERVER['REQUEST_METHOD'] === 'POST') 
     {
-        $nombre   = trim($_POST['nombre'] ?? '');
-        $apellido = trim($_POST['apellido'] ?? '');
-        $correo   = trim($_POST['correo'] ?? '');
-        $telefono = trim($_POST['telefono'] ?? '');
-        $password = trim($_POST['password'] ?? '');
-        $confirm  = trim($_POST['confirm_password'] ?? '');
-        $terms    = isset($_POST['terms']);
+        header('Location: index.php?controller=usuario&action=index&mode=register');
+        exit;
+    }
 
-        $errors = [];
-
-        // Validaciones básicas
-        if (!$nombre || !$apellido || !$correo || !$password || !$confirm) 
+    /**
+     * Registro de usuario
+     *
+     * Verifica que se haya realizado un pedido POST y que se hayan proporcionado
+     * todos los campos necesarios. Luego, verifica que las contraseñas sean iguales, que
+     * se haya aceptado los términos y condiciones, y que el correo no esté registrado.
+     * Si no hay errores, crea un nuevo usuario con la contraseña hasheada y redirige
+     * a la página de inicio con un parámetro de éxito.
+     * Si hay errores, muestra la vista de login con los mensajes de error correspondientes.
+     */
+    public function register() 
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') 
         {
-            $errors[] = "Todos los campos son obligatorios.";
-        }
+            $nombre   = trim($_POST['nombre'] ?? '');
+            $apellido = trim($_POST['apellido'] ?? '');
+            $correo   = trim($_POST['correo'] ?? '');
+            $telefono = trim($_POST['telefono'] ?? '');
+            $password = trim($_POST['password'] ?? '');
+            $confirm  = trim($_POST['confirm_password'] ?? '');
+            $terms    = isset($_POST['terms']);
 
-        if ($password !== $confirm) 
-        {
-            $errors[] = "Las contraseñas no coinciden.";
-        }
+            $errors = [];
 
-        if (!$terms) 
-        {
-            $errors[] = "Debe aceptar los términos y condiciones.";
-        }
+            if (!$nombre || !$apellido || !$correo || !$password || !$confirm) 
+                $errors[] = "Todos los campos son obligatorios.";
+            if ($password !== $confirm) 
+                $errors[] = "Las contraseñas no coinciden.";
+            if (!$terms) 
+                $errors[] = "Debe aceptar los términos y condiciones.";
+            if ($this->usuarioModel->exists($correo)) 
+                $errors[] = "El correo ya está registrado.";
+            if (!$telefono) 
+                $errors[] = "Debe ingresar su teléfono.";
 
-        // Validar que no exista el correo
-        if ($this->usuarioModel->exists($correo)) 
-        {
-            $errors[] = "El correo ya está registrado.";
-        }
-        if (!$telefono) 
-        {
-            $errors[] = "Debe ingresar su teléfono.";
-        }
-
-        if (empty($errors)) 
-        {
-            // Hashear la contraseña
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-            // Crear usuario
-            $this->usuarioModel->create
-            (
-                $nombre . ' ' . $apellido,
-                 $correo,
-                $telefono,
-                $hashedPassword
-            );
-
-            // Redirigir a login
-            header('Location: index.php?controller=usuario&action=index&success=1');
-            exit;
+            if (empty($errors)) 
+            {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $this->usuarioModel->create($nombre . ' ' . $apellido, $correo, $telefono, $hashedPassword);
+                header('Location: index.php?controller=usuario&action=index&success=1');
+                exit;
+            } else {
+                require 'views/login/login.php';
+            }
         } else {
-            // Mostrar errores
-            require 'views/login/login.php';
-        }
-    }   else 
-        {
-            // Si no es POST, solo mostrar formulario
             require 'views/login/login.php';
         }   
-}
+    }
 
-
+    // =========================================================
+    // LOGOUT
+    // =========================================================
     public function logout() 
     {
         session_destroy();

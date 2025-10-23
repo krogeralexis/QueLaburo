@@ -1,0 +1,18 @@
+{
+    "name": "alexis/mvc",
+    "autoload": {
+        "psr-4": {
+            "Alexis\\Mvc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "krogeralexis",
+            "email": "kroger.alexis01@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.0",
+        "facebook/graph-sdk": "^5.1"
+    }
+}

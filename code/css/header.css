@@ -330,6 +330,9 @@
     position: relative;
     gap: 1vw;
   }
+  .btnLogin {
+    display: none;
+  }
 
   .logo-image {
     height: 4vh;
@@ -362,9 +365,7 @@
     gap: 1vw;
   }
 
-  .btn-primary {
-    order: 1;
-  }
+ 
 
   .profile-menu-container {
     order: 2;
