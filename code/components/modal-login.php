@@ -93,7 +93,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script>
   const firebaseConfig = {
-    apiKey: "TU_API_KEY",
+    apiKey: "AIzaSyBsvO2Ld7vx4ILcfgzYK9Cu3XGoad0LLGc",
     authDomain: "quelaburo-8bc1c.firebaseapp.com",
     projectId: "quelaburo-8bc1c",
   };
