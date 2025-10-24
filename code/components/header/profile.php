@@ -11,21 +11,32 @@ $es_cliente   = $es_cliente ?? false;
   <div class="dropdown-menu" id="dropdownMenu">
     
       <button class="value">
-        <img src="css/storage/perfilsito.svg" alt="Profile Icon" class="icon-profile">
+        <img src="css/storage/perfilsito.svg" alt="Profile Icon" class="icon-profile"
+        href="index.php?controller=usuario&action=VerPerfil">
         Ver perfil
       </button>
 
     <?php if ($es_cliente): ?>
       <button class="value">
-        <img src="css/storage/reservas.svg" alt="Bookings Icon" class="icon-bookings">
+        <img src="css/storage/reservas.svg" alt="Bookings Icon" class="icon-bookings"
+        href="index.php?controller=cliente&action=VerReservas">
         Mis reservas
       </button>
     <?php endif; ?>
 
     <button class="value">
-      <img src="css/storage/campanita.svg" alt="Bell Icon" class="icon-bell">
+      <img src="css/storage/campanita.svg" alt="Bell Icon" class="icon-bell"
+      href="index.php?controller=usuario&action=Notificaciones">
       Notificaciones
     </button>
+
+    <?php if ($es_proveedor): ?>
+      <button class="value">
+        <img src="css/storage/reservas.svg" alt="Bookings Icon" class="icon-bookings"
+        href="index.php?controller=proveedor&action=VerMisServicios">
+        Mis Servicios
+      </button>
+    <?php endif; ?>
 
     <!-- Botón de cambio de apariencia -->
     <div class="value">
