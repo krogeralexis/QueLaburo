@@ -9,12 +9,11 @@ $es_cliente   = $es_cliente ?? false;
   </button>
 
   <div class="dropdown-menu" id="dropdownMenu">
-    <?php if ($es_proveedor): ?>
+    
       <button class="value">
         <img src="css/storage/perfilsito.svg" alt="Profile Icon" class="icon-profile">
         Ver perfil
       </button>
-    <?php endif; ?>
 
     <?php if ($es_cliente): ?>
       <button class="value">
