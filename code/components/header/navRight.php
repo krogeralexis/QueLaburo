@@ -21,4 +21,6 @@ $es_cliente   = $es_cliente ?? false;
     <!-- Acciones de autenticación -->
     <?php require __DIR__ . '/authActions.php'; ?>
   <?php endif; ?>
+    
 </div>
+

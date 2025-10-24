@@ -245,7 +245,7 @@
    SWITCH ESTILO DIA/NOCHE
 ============================== */
 .switch {
-  font-size: 14px;          /* un poco más chico, podés cambiar */
+  font-size: 14px;
   position: relative;
   display: inline-block;
   width: 3em;               /* ancho del switch */
@@ -258,6 +258,7 @@
   height: 0;
 }
 
+/* Slider principal */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -265,11 +266,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(75, 73, 74); /* color gris oscuro */
+  background-color: rgb(75, 73, 74); /* color gris oscuro por defecto: modo día */
   transition: 0.4s;
   border-radius: 30px;
 }
 
+/* Círculo del switch */
 .slider:before {
   position: absolute;
   content: "";
@@ -293,6 +295,18 @@
   background-color: yellow;  /* color círculo noche */
   box-shadow: none;
 }
+
+/* Checkbox no marcado: modo día (asegura que empiece en día) */
+.switch input:not(:checked) + .slider {
+  background-color: rgb(75, 73, 74); /* gris día */
+}
+
+.switch input:not(:checked) + .slider:before {
+  transform: translateX(0);
+  background-color: black;
+  box-shadow: inset 6px -3px 0 0 white;
+}
+
 
 
 /* ==============================
@@ -390,6 +404,7 @@
 body.dark-mode {
   background-color: #121212;
   color: #E0E0E0;
+  background-image: url("storage/error_bg_alfaCod_v0.1.jpg");
 }
 
 body.dark-mode .header {

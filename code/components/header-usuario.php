@@ -30,8 +30,16 @@ $es_cliente   = $usuario_esta_logeado ? ($_SESSION['usuario']['es_cliente'] ?? f
     <?php else: ?>
       <?php require __DIR__ . '/header/authActions.php'; ?>
     <?php endif; ?>
-  </div>
+  </div> 
+  <!-- Botón de cambio de apariencia -->
+    <div class="value">
+      <label class="switch">
+        <input type="checkbox" id="toggleTheme" />
+        <span class="slider"></span>
+      </label>
+    </div>
 </header>
+
 
 <!-- Scripts -->
 <script src="js/header.js"></script>

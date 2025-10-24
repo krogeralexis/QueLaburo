@@ -14,46 +14,8 @@ class LoginController
         require 'views/login/login.php';
     }
 
-    // =========================================================
-    // LOGIN CON GOOGLE
-    // =========================================================
-    public function googleLogin()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $correo = $_POST['correo'] ?? '';
-            $nombre = $_POST['nombre'] ?? '';
-            $google_uid = $_POST['google_uid'] ?? '';
+    
 
-            if (!$correo || !$nombre || !$google_uid) {
-                echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
-                return;
-            }
-
-            $user = $this->usuarioModel->getByEmail($correo);
-
-            if (!$user) {
-                // Usuario nuevo, creamos con contraseña random y UID de Google
-                $passwordRandom = password_hash(bin2hex(random_bytes(5)), PASSWORD_DEFAULT);
-                $this->usuarioModel->create($nombre, $correo, '000000000', $passwordRandom, $google_uid);
-                $user = $this->usuarioModel->getByEmail($correo);
-            } else {
-                // Usuario existente: aseguramos que su google_uid esté registrado
-                if (empty($user['google_uid'])) {
-                    $this->usuarioModel->setGoogleUid($user['id'], $google_uid);
-                }
-            }
-
-            $_SESSION['usuario'] = [
-                'id' => $user['id'],
-                'nombre' => $user['nombre'],
-                'correo' => $user['correo'],
-                'es_cliente' => $this->usuarioModel->esCliente($user['id']),
-                'es_proveedor' => $this->usuarioModel->esProveedor($user['id'])
-            ];
-
-            echo json_encode(['success' => true]);
-        }
-    }
 
     // =========================================================
     // LOGIN NORMAL
@@ -170,6 +132,38 @@ class LoginController
             require 'views/login/login.php';
         }   
     }
+
+    // =========================================================
+    // COMPLETAR REGISTRO GOOGLE
+    // =========================================================
+
+    public function completarGoogle()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nombre = trim($_POST['nombre'] ?? '');
+        $telefono = trim($_POST['telefono'] ?? '');
+        $correo = trim($_POST['correo'] ?? '');
+        $google_uid = trim($_POST['google_uid'] ?? '');
+
+        if (!$nombre || !$telefono || !$correo || !$google_uid) {
+            echo json_encode(['success' => false, 'message' => 'Faltan datos']);
+            return;
+        }
+
+        $user = $this->usuarioModel->getByEmail($correo);
+
+        if ($user) {
+            $this->usuarioModel->update($user['id'], $nombre, $correo, $telefono);
+            echo json_encode(['success' => true, 'message' => 'Usuario completado']);
+        } else {
+            // Crea usuario nuevo correctamente
+            $passwordRandom = password_hash(bin2hex(random_bytes(5)), PASSWORD_DEFAULT);
+            $this->usuarioModel->create($nombre, $correo, $telefono, $passwordRandom, $google_uid);
+            echo json_encode(['success' => true, 'message' => 'Usuario creado']);
+        }
+    }
+}
+
 
     // =========================================================
     // LOGOUT

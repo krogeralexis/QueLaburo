@@ -26,3 +26,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // ====== (Espacio reservado para otros comportamientos del header) ======
   // Podés agregar acá animaciones, despliegues de usuario, etc.
 });
+

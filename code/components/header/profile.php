@@ -7,46 +7,44 @@ $es_cliente   = $es_cliente ?? false;
   <button class="profile-btn" id="profileBtn">
     <img src="css/storage/userThumb.svg" alt="Perfil" class="usr-img">
   </button>
-
+  
   <div class="dropdown-menu" id="dropdownMenu">
-    
-      <button class="value">
-        <img src="css/storage/perfilsito.svg" alt="Profile Icon" class="icon-profile"
-        href="index.php?controller=usuario&action=VerPerfil">
-        Ver perfil
-      </button>
 
+    <!-- Ver perfil -->
+    <a class="value" href="index.php?controller=usuario&action=VerPerfil">
+      <img src="css/storage/perfilsito.svg" alt="Profile Icon" class="icon-profile">
+      Ver perfil
+    </a>
+
+    <!-- Mis reservas (solo para clientes) -->
     <?php if ($es_cliente): ?>
-      <button class="value">
-        <img src="css/storage/reservas.svg" alt="Bookings Icon" class="icon-bookings"
-        href="index.php?controller=cliente&action=VerReservas">
+      <a class="value" href="index.php?controller=cliente&action=VerReservas">
+        <img src="css/storage/reservas.svg" alt="Bookings Icon" class="icon-bookings">
         Mis reservas
-      </button>
+      </a>
     <?php endif; ?>
 
-    <button class="value">
-      <img src="css/storage/campanita.svg" alt="Bell Icon" class="icon-bell"
-      href="index.php?controller=usuario&action=Notificaciones">
+    <!-- Notificaciones -->
+    <a class="value" href="index.php?controller=usuario&action=Notificaciones">
+      <img src="css/storage/campanita.svg" alt="Bell Icon" class="icon-bell">
       Notificaciones
-    </button>
+    </a>
 
+    <!-- Mis servicios (solo para proveedores) -->
     <?php if ($es_proveedor): ?>
-      <button class="value">
-        <img src="css/storage/reservas.svg" alt="Bookings Icon" class="icon-bookings"
-        href="index.php?controller=proveedor&action=VerMisServicios">
-        Mis Servicios
-      </button>
+      <a class="value" href="index.php?controller=proveedor&action=VerMisServicios">
+        <img src="css/storage/reservas.svg" alt="Bookings Icon" class="icon-bookings">
+        Mis servicios
+      </a>
     <?php endif; ?>
 
-    <!-- Botón de cambio de apariencia -->
-    <div class="value">
-      <span>Modo:</span>
-      <label class="switch">
-        <input type="checkbox" id="toggleTheme"/>
-        <span class="slider"></span>
-      </label>
-    </div>
+    
 
-    <a href="index.php?controller=login&action=logout">Cerrar sesión</a>
+    <!-- Cerrar sesión -->
+    <a class="value" href="index.php?controller=login&action=logout">
+      <img src="css/storage/logout.svg" alt="Logout Icon" class="icon-logout">
+      Cerrar sesión
+    </a>
+
   </div>
 </div>
