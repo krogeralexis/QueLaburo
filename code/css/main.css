@@ -156,8 +156,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2vw;
-  height: 2vh;
+  width: auto;
+  height: 1vh;
 }
 
 .name {
@@ -295,8 +295,8 @@
   }
 
   .profile-icon {
-    width: 12vw;
-    height: 12vw;
+    width: 10vw;
+    height: 10vw;
   }
 
   .name, .category, .title, .description {
