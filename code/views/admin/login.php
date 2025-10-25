@@ -64,7 +64,7 @@
       <div class="error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
-    <form method="POST" action="index.php?controller=adminauth&action=login">
+    <form method="POST" action="adminauth&action=login">
       <input type="email" name="correo" placeholder="Correo" required>
       <input type="password" name="password" placeholder="Contraseña" required>
       <button type="submit">Ingresar</button>
