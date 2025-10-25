@@ -1,0 +1,135 @@
+html, body {
+  height: 100%; /* altura total de la ventana */
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* hace que el contenido sea vertical */
+}
+
+main {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+
+
+/* ==============================
+   Mobile adjustments
+============================== */
+@media (max-width: 768px) {
+
+  /* ==============================
+     Main background
+  ==============================
+  */
+  main {
+    background-attachment: scroll; /* evita que se rompa en móviles */
+  }
+
+  /* ==============================
+     Search bar
+  ==============================
+  */
+  .search-bar {
+    width: 90vw;
+    flex-direction: column;
+    height: auto;
+    font-size: 3vw;
+  }
+
+  .filter-dropdown {
+    width: 80vw;
+  }
+
+  /* ==============================
+     Cards / Carousel
+  ==============================
+  */
+  .card {
+    width: 80vw;
+    height: auto;
+    margin: 1vh auto;
+  }
+
+  .card-img {
+    height: 40vw;
+  }
+
+  .card-body {
+    padding: 3vw;
+  }
+
+  .card-buttons .main-btn {
+    font-size: 3vw;
+    padding: 1.5vw 0;
+  }
+
+  .arrow {
+    width: 10vw;
+    font-size: 5vw;
+  }
+
+  /* ==============================
+     Header
+  ==============================
+  */
+  .header {
+    grid-template-columns: 1fr;
+    padding: 2vh 4vw;
+    height: auto;
+    gap: 2vh;
+  }
+
+  .nav-left ul,
+  .auth-actions,
+  .nav-right {
+    flex-direction: column;
+    gap: 1.5vh;
+  }
+
+  .logo-text h1 {
+    font-size: 3vh;
+  }
+
+  .logo-text span {
+    font-size: 1.5vh;
+  }
+
+  .btn, .btn-primary {
+    width: 100%;
+    font-size: 3vw;
+    padding: 2vw;
+    text-align: center;
+  }
+
+  .profile img,
+  .usr-img {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  .dropdown-menu {
+    min-width: 80vw;
+    font-size: 3vw;
+  }
+
+  /* ==============================
+     Footer
+  ==============================
+  */
+  .footer {
+    height: auto;
+    padding: 2vh 0;
+  }
+
+  .footer p {
+    font-size: 3vw;
+  }
+}
+

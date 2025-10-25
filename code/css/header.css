@@ -1,0 +1,431 @@
+/* ==============================
+   HEADER LAYOUT
+============================== */
+.header {
+  display: flex;
+  align-items: center;
+  height: 10vh;
+  padding: 0 4vw;
+  border-bottom: 0.1vh solid #21272A;
+  background: #FFFFFF;
+  gap: 1vw;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+} 
+
+/* ==============================
+   LOGO
+============================== */
+.logo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 1vw;
+  max-height: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.logo-image {
+  height: 4vh;
+  width: auto;
+}
+.logo-text h1 {
+  font-size: 4vh;
+  font-weight: 700;
+  color: #697077;
+  margin: 0;
+}
+.logo-text span {
+  font-size: 2vh;
+  color: #697077;
+  display: block;
+  margin-top: -0.4vh;
+}
+
+/* ==============================
+   NAV LEFT
+============================== */
+.nav-left {
+  display: flex;
+  flex: 1;
+  justify-content: left;
+}
+.nav-left ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  height: 6vh;
+  width: auto;
+  font-size: 2.5vh;
+  gap: 2vw;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-left .nav-link {
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #21272A;
+  display: flex;
+  align-items: center;
+  gap: 0.4vw;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-left .nav-link:hover {
+  color: #007BFF;
+}
+
+.nav-left .nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2vw; 
+  height: auto;
+}
+
+/* ==============================
+   NAV RIGHT
+============================== */
+.nav-right {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2vw;
+  font-size: 2vh;
+  z-index: 100;
+}
+
+/* ==============================
+   AUTH ACTIONS
+============================== */
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  font-size: 2.5vh;
+}
+
+/* ==============================
+   BOTONES
+============================== */
+.btn, .btn-primary {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.6vh 1.2vw;
+  height: 6vh;
+  width: auto;
+  background: #FFFFFF;
+  border: 0.2vh solid #000000;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  text-decoration: none;
+  color: #21272A;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn:hover,
+.btn-primary:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.btn-primary {
+  border-color: #000000;
+}
+
+/* ==============================
+   PROFILE
+============================== */
+.profile img,
+.usr-img {
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ==============================
+   PROFILE MENU (desplegable)
+============================== */
+.profile-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn:hover .usr-img {
+  box-shadow: 0 0 0.4vh #00000030;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 1vh);
+  background: #FFFFFF;
+  border: 0.1vh solid #DDE1E6;
+  border-radius: 1vh;
+  box-shadow: 0 0.6vh 1vh rgba(0, 0, 0, 0.15);
+  min-width: 14vw;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-0.5vh);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 1.2vh 1.5vw;
+  text-decoration: none !important;
+  color: #21272A !important;
+  font-size: 2vh;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  background: transparent;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.dropdown-menu a:hover {
+  background: #F2F4F8;
+  color: #000000 !important;
+}
+
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-menu .value {
+  display: flex;
+  align-items: center;
+  gap: 0.8vw;
+  padding: 1vh 1.5vw;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-size: 2vh;
+  color: #21272A;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.dropdown-menu .value img {
+  width: 1vw;
+  object-fit: contain;
+}
+
+.dropdown-menu .value:hover {
+  background: #F2F4F8;
+  color: #000000;
+}
+
+/* ==============================
+   SWITCH ESTILO DIA/NOCHE
+============================== */
+.switch {
+  font-size: 14px;
+  position: relative;
+  display: inline-block;
+  width: 3em;               /* ancho del switch */
+  height: 1.6em;            /* alto del switch */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider principal */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(75, 73, 74); /* color gris oscuro por defecto: modo día */
+  transition: 0.4s;
+  border-radius: 30px;
+}
+
+/* Círculo del switch */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.2em;           /* tamaño del círculo */
+  width: 1.2em;
+  border-radius: 50%;
+  left: 0.2em;
+  bottom: 0.2em;
+  background-color: black;  /* color del círculo en modo día */
+  box-shadow: inset 6px -3px 0 0 white; /* dibujito de sol/sombra */
+  transition: 0.4s;
+}
+
+/* Checkbox marcado: modo noche */
+.switch input:checked + .slider {
+  background-color: #2196f3; /* azul noche */
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(1.4em);
+  background-color: yellow;  /* color círculo noche */
+  box-shadow: none;
+}
+
+/* Checkbox no marcado: modo día (asegura que empiece en día) */
+.switch input:not(:checked) + .slider {
+  background-color: rgb(75, 73, 74); /* gris día */
+}
+
+.switch input:not(:checked) + .slider:before {
+  transform: translateX(0);
+  background-color: black;
+  box-shadow: inset 6px -3px 0 0 white;
+}
+
+
+
+/* ==============================
+   HAMBURGER BUTTON (mobile)
+============================== */
+.hamburger img,
+.ham-img {
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: transparent;
+}
+
+.hamburger,
+.ham-img {
+  display: none;
+}
+
+/* ==============================
+   RESPONSIVE MOBILE
+============================== */
+@media (max-width: 768px) {
+  .hamburger,
+  .ham-img {
+    display: block;
+  }
+
+  .header {
+    height: 10vh;
+    display: fixed;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 4vw;
+    position: relative;
+    gap: 1vw;
+  }
+  .btnLogin {
+    display: none;
+  }
+
+  .logo-image {
+    height: 4vh;
+    width: auto;
+  }
+
+  .logo-text h1 {
+    font-size: 3vh;
+  }
+
+  .logo-text span {
+    font-size: 1.6vh;
+  }
+
+  .nav-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-left ul li:not(:first-child) {
+    display: none;
+  }
+
+  .nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1vw;
+  }
+
+ 
+
+  .profile-menu-container {
+    order: 2;
+    position: relative;
+  }
+
+  .usr-img {
+    width: 6vh;
+    height: 6vh;
+  }
+
+  .dropdown-menu {
+    min-width: 50vw;
+    right: 0;
+    left: auto;
+  }
+}
+
+/* ==============================
+   MODO OSCURO
+============================== */
+body.dark-mode {
+  background-color: #121212;
+  color: #E0E0E0;
+  background-image: url("storage/error_bg_alfaCod_v0.1.jpg");
+}
+
+body.dark-mode .header {
+  background-color: #1E1E1E;
+  border-bottom: 0.1vh solid #333;
+}
+
+body.dark-mode .dropdown-menu {
+  background-color: #2A2A2A;
+  border-color: #444;
+}
+
+body.dark-mode .dropdown-menu .value,
+body.dark-mode .dropdown-menu a {
+  color: #E0E0E0 !important;
+}
+
+body.dark-mode .dropdown-menu .value:hover,
+body.dark-mode .dropdown-menu a:hover {
+  background-color: #3A3A3A;
+  color: #FFFFFF !important;
+}
+
+/* 🔹 Fin del menú desplegable y modo oscuro 🔹 */

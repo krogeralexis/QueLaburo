@@ -1,0 +1,14 @@
+.footer {
+  background: #2d2f31;
+  color: #fff;
+  text-align: center;
+  height: 10vh;
+  display: flex;              /* flexbox para controlar */
+  align-items: center;        /* centra verticalmente */
+  justify-content: center;    /* centra horizontalmente */
+}
+
+.footer p {
+  margin: 0;   /* quita márgenes del párrafo */
+  font-size: 1.5vh; /* hace que el texto escale y quepa */
+}

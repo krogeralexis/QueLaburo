@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+ 
+  color: #21272A;
+}
+a {
+  text-decoration: none;
+  color: #21272A;
+}
+.btn-primary {
+  background: #FFFFFF;
+  border: 2px solid #21272A;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.btn-primary:hover {
+  background: #f2f2f2;
+}
