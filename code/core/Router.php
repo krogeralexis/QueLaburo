@@ -31,7 +31,7 @@ class Router {
         $controller = preg_replace('/[^a-zA-Z0-9]/', '', $controller);
         $action = preg_replace('/[^a-zA-Z0-9]/', '', $action);
 
-        $controllerClass = ucfirst($controller) . 'Controller';
+        $controllerClass = ucfirst($controller) . 'Controlleer';
         $controllerFile = __DIR__ . "/../controllers/{$controllerClass}.php";
 
         if (!file_exists($controllerFile)) die("Controlador no encontrado: {$controllerClass}");
