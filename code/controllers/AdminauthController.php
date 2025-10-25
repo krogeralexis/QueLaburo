@@ -1,12 +1,17 @@
 <?php
+// controllers/AdminAuthController.php
 require_once __DIR__ . '/../models/AdminAuth.php';
 require_once __DIR__ . '/../core/View.php';
 
 class AdminAuthController {
 
+    // Muestra el login
     public function login() {
+        session_start();
+
+        // Si ya hay sesión, redirige al panel
         if (isset($_SESSION['admin_id'])) {
-            header('Location: /admin/panel');
+            header('Location: index.php?controller=adminAuth&action=panel');
             exit;
         }
 
@@ -19,25 +24,32 @@ class AdminAuthController {
 
             if ($adminId) {
                 $_SESSION['admin_id'] = $adminId;
-                header('Location: /admin/panel');
+                header('Location: index.php?controller=adminAuth&action=panel');
                 exit;
             } else {
-                Core\View::render('admin/login', ['error' => 'Correo o contraseña inválidos.']);
+                Core\View::render('adminPanel/login/login', ['error' => 'Correo o contraseña inválidos.']);
                 return;
             }
         }
 
-        Core\View::render('admin/login');
+        Core\View::render('adminPanel/login/login');
     }
 
+    // Panel de administración
     public function panel() {
+        session_start();
         \Core\AdminMiddleware::handle(); // protege toda la acción
-        Core\View::render('admin/panel', ['admin_id' => $_SESSION['admin_id']]);
+
+        Core\View::render('adminPanel/administrador/index', [
+            'admin_id' => $_SESSION['admin_id']
+        ]);
     }
 
+    // Logout
     public function logout() {
         session_start();
         session_destroy();
-        header('Location: /admin');
+        header('Location: index.php?controller=adminAuth&action=login');
+        exit;
     }
 }
