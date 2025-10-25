@@ -11,7 +11,7 @@ class Router {
         $controller = '';
         $action = '';
 
-        if ($url) {
+        
             $parts = explode('/', trim($url, '/'));
             echo "1";
             // Rutas especiales: /admin o cualquier subruta de admin
@@ -25,7 +25,7 @@ class Router {
                 $action = $parts[1] ?? 'index';
                 echo "3";
             }
-        }
+        
 
         // Limpieza básica para evitar caracteres extraños
         $controller = preg_replace('/[^a-zA-Z0-9]/', '', $controller);
