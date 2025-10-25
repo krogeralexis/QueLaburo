@@ -11,7 +11,7 @@ class Router {
         $controller = 'usuario';
         $action = 'index';
 
-        if ($url) {
+        if ($url !== NULL) {
             $parts = explode('/', trim($url, '/'));
 
             // Rutas especiales: /admin o cualquier subruta de admin
