@@ -15,14 +15,14 @@ class Router {
             $parts = explode('/', trim($url, '/'));
             echo "1";
             // Rutas especiales: /admin o cualquier subruta de admin
-            if ($parts[0] === 'admin') {
+            if ($parts[1] === 'admin') {
                 $controller = 'adminauth';        // controlador para admin login
-                $action = $parts[1] ?? 'login';   // si no hay acción, va a login
+                $action ='login';   // si no hay acción, va a login
                 echo "2";
             } else {
                 // URL normal tipo /usuario/index
                 $controller = $parts[0] ?? 'usuario';
-                $action = $parts[1] ?? 'index';
+                $action = 'index';
                 echo "3";
             }
         
