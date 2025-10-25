@@ -10,7 +10,7 @@ class AdminAuthController {
 
         // Si ya hay sesión, redirige al panel
         if (isset($_SESSION['admin_id'])) {
-            header('Location: index.php?controller=adminauth&action=panel');
+            header('Location: adminauth&action=panel');
             exit;
         }
 
@@ -23,7 +23,7 @@ class AdminAuthController {
 
             if ($adminId) {
                 $_SESSION['admin_id'] = $adminId;
-                header('Location: index.php?controller=adminauth&action=panel');
+                header('Location: adminauth&action=panel');
                 exit;
             } else {
                 Core\View::render('admin/login', ['error' => 'Correo o contraseña inválidos.']);
@@ -39,7 +39,7 @@ class AdminAuthController {
 
         // Verifica si hay sesión
         if (!isset($_SESSION['admin_id'])) {
-            header('Location: index.php?controller=adminauth&action=login');
+            header('Location: adminauth&action=login');
             exit;
         }
 
@@ -48,7 +48,7 @@ class AdminAuthController {
         if (!$auth->esAdmin($_SESSION['admin_id'])) {
             session_unset();
             session_destroy();
-            header('Location: index.php?controller=adminauth&action=login');
+            header('Location: adminauth&action=login');
             exit;
         }
 
@@ -62,7 +62,7 @@ class AdminAuthController {
     public function logout() {
         session_unset();
         session_destroy();
-        header('Location: index.php?controller=adminauth&action=login');
+        header('Location: adminauth&action=login');
         exit;
     }
 }
