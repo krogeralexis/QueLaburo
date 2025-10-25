@@ -10,7 +10,7 @@ class Router {
         // Valores por defecto
         
 
-        if ($url !== NULL) {
+        if ($url) {
             $parts = explode('/', trim($url, '/'));
             echo "1";
             // Rutas especiales: /admin o cualquier subruta de admin
@@ -26,8 +26,8 @@ class Router {
             }
         } else {
             // fallback con ?controller=usuario&action=index
-            $controller = 'usuario';
-            $action = 'index';
+            $controller = $_GET['controller'] ?? 'usuario';
+            $action = $_GET['action'] ?? 'index';
             echo "4";
         }
 
