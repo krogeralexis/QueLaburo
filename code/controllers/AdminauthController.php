@@ -2,6 +2,8 @@
 // controllers/AdminAuthController.php
 require_once __DIR__ . '/../models/AdminAuth.php';
 require_once __DIR__ . '/../core/View.php';
+require_once __DIR__ . '/../core/AdminMiddleware.php';
+
 
 class AdminAuthController {
 
@@ -37,7 +39,6 @@ class AdminAuthController {
 
     // Panel de administración
     public function panel() {
-        session_start();
         \Core\AdminMiddleware::handle(); // protege toda la acción
 
         Core\View::render('adminPanel/administrador/index', [
