@@ -5,11 +5,18 @@ class Router {
     public static function route() {
         // Soporta URL limpia con ?url=usuario/index o fallback
         $url = $_GET['url'] ?? '';
-        if ($url) {
+
+        if ($url === 'admin') {
+            // Atajo para /admin → login admin
+            $controller = 'adminAuth';
+            $action = 'login';
+        } elseif ($url) {
+            // URL limpia tipo /usuario/index
             $parts = explode('/', trim($url, '/'));
             $controller = $parts[0] ?? 'usuario';
             $action = $parts[1] ?? 'index';
         } else {
+            // fallback con ?controller=usuario&action=index
             $controller = $_GET['controller'] ?? 'usuario';
             $action = $_GET['action'] ?? 'index';
         }

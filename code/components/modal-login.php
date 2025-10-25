@@ -22,8 +22,6 @@
         <p class="sign-up-label">
           ¿No tenés una cuenta? <span class="sign-up-link" id="toRegister">Unirse</span>
         </p>
-
-        
         </div>
       </div>
     </div>

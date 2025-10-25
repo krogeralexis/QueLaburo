@@ -12,7 +12,7 @@ $usuario_esta_logeado = isset($_SESSION['usuario']['id']);
       </a>
     </li>
 
-    <li><a href="index.php?controller=proveedor&action=index" class="nav-link">Panel de Administrador</a></li>
+    <li><a href="index.php?controller=proveedor&action=index" class="nav-link">Conviertete En Proveedor</a></li>
     <li>
       <a href="#" class="nav-link">
         Explora

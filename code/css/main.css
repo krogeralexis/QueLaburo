@@ -1,7 +1,8 @@
 /* ==============================
    SEARCH BAR
 ============================== */
-.search-bar {
+.search-bar 
+{
   display: flex;
   align-items: center;
   width: 40vw;
@@ -14,14 +15,16 @@
   position: relative; /* Para el dropdown */
 }
 
-.search-bar .search-icon {
+.search-bar .search-icon 
+{
   padding: 0 1vh;
   height: 3vh;
   display: flex;
   align-items: center;
 }
 
-.search-bar input {
+.search-bar input 
+{
   flex: 1;
   border: none;
   outline: none;
@@ -29,7 +32,8 @@
   height: 100%;
 }
 
-.search-bar .filter-btn {
+.search-bar .filter-btn 
+{
   width: auto;
   height: 3vh;
   border: none;
@@ -44,7 +48,8 @@
 }
 
 /* Dropdown menu para filtros */
-.filter-dropdown {
+.filter-dropdown 
+{
   display: none; /* se muestra al hacer click */
   position: absolute;
   top: 100%; /* justo debajo del botón */
@@ -57,23 +62,27 @@
   min-width: 150px;
 }
 
-.filter-dropdown.active {
+.filter-dropdown.active 
+{
   display: block;
 }
 
-.filter-dropdown ul {
+.filter-dropdown ul 
+{
   list-style: none;
   margin: 0;
   padding: 0.5vh 0;
 }
 
-.filter-dropdown ul li {
+.filter-dropdown ul li 
+{
   padding: 1vh 2vw;
   cursor: pointer;
   font-size: 1.5vh;
 }
 
-.filter-dropdown ul li:hover {
+.filter-dropdown ul li:hover 
+{
   background-color: #f0f0f0;
 }
 
@@ -81,7 +90,8 @@
 /* ==============================
    CARDS / CARRUSEL
 ============================== */
-.card-container {
+.card-container 
+{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +103,8 @@
 }
 
 /* Contenedor que se desplaza (carrusel horizontal) */
-.carousel-wrapper {
+.carousel-wrapper 
+{
   display: flex;
   flex-direction: row;
   gap: 1vw;
@@ -103,11 +114,13 @@
   padding: 1vh 0;
 }
 
-.carousel-wrapper::-webkit-scrollbar {
+.carousel-wrapper::-webkit-scrollbar 
+{
   display: none; /* Oculta la barra de scroll */
 }
 
-.card {
+.card 
+{
  width: 17vw;       /* ancho relativo al viewport */
   height: 60vh;      /* altura relativa al viewport */
   border: 0.2vh solid #DDE1E6;
@@ -117,13 +130,15 @@
   flex-shrink: 0;     /* evita que se reduzca al hacer scroll */
 }
 
-.card-img {
+.card-img 
+{
   width: 100%;
   height: 35vh;
   object-fit: cover;
 }
 
-.card-body {
+.card-body 
+{
   padding: 2vh 1.5vw;
   display: flex;
   flex-direction: column;
@@ -131,28 +146,33 @@
   flex-grow: 1;
 }
 
-.category {
+.category 
+{
   font-size: 1.2vh;
   color: #777;
 }
 
-.title {
+.title 
+{
   font-size: 2vh;
   font-weight: bold;
 }
 
-.description {
+.description 
+{
   font-size: 1.5vh;
   color: #21272A;
 }
 
-.profile {
+.profile 
+{
   display: flex;
   align-items: center;
   gap: 1vw;
 }
 
-.profile-icon {
+.profile-icon 
+{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,18 +180,21 @@
   height: 1vh;
 }
 
-.name {
+.name 
+{
   font-size: 1.5vh;
   font-weight: 500;
 }
 
-.card-buttons {
+.card-buttons 
+{
   display: flex;
   gap: 1vw;
   margin-top: auto;
 }
 
-.main-btn {
+.main-btn 
+{
   flex: 1;
   padding: 1vh 0;
   font-size: 1.5vh;
@@ -180,12 +203,14 @@
   cursor: pointer;
 }
 
-.main-btn:hover {
+.main-btn:hover 
+{
   background: #21272A;
   color: #fff;
 }
 
-.arrow {
+.arrow 
+{
   background: none;
   border: none;
   width: 3vw;
@@ -197,42 +222,39 @@
   z-index: 10;
 }
 
-.arrow.left {
+.arrow.left 
+{
   left: 1vw;
 }
 
-.arrow.right {
+.arrow.right 
+{
   right: 1vw;
 }
 
-.arrow img {
+.arrow img 
+{
   width: 100%;
   height: auto;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  .card {
-    width: 80vw;
-    margin: 0 5vw;
-  }
-  .filter-dropdown {
-    width: 50vw;
-  }
-}
+
 
 /* ==============================
    MOBILE OPTIMIZATIONS
 ============================== */
-@media (max-width: 480px) {
+@media (max-width: 768px) 
+{
   /* Main background */
-  main {
+  main 
+  {
     background-attachment: scroll; /* evita problemas con fixed en móviles */
   }
 
   /* SEARCH BAR */
-  .search-bar {
-    width: 90vw;
+  .search-bar 
+  {
+    width: 90%;
     height: auto;
     flex-direction: column;
     padding: 1vh 2vw;
@@ -240,80 +262,96 @@
     font-size: 2vh;
   }
 
-  .search-bar input {
+  .search-bar input 
+  {
     width: 100%;
     font-size: 1em;
   }
 
-  .filter-wrapper {
+  .filter-wrapper 
+  {
     width: 100%;
   }
 
-  .filter-btn {
+  .filter-btn 
+  {
     width: 100%;
     padding: 1vh;
     font-size: 1.5vh;
   }
 
-  .filter-dropdown {
+  .filter-dropdown 
+  {
     width: 90%;
     right: 5%;
     font-size: 1.8vh;
   }
 
   /* CARRUSEL */
-  .card-container {
+  .card-container 
+  {
     flex-direction: column;
     align-items: center;
     gap: 2vh;
     margin: 2vh 0;
   }
 
-  .carousel-wrapper {
+  .carousel-wrapper 
+  {
     flex-direction: column;
     width: 100%;
     padding: 0;
     overflow-x: hidden;
+    align-items: center;
   }
 
-  .card {
+  .card 
+  {
     width: 90%;
     height: auto;
   }
 
-  .card-img {
+  .card-img 
+  {
     height: 40vw; /* ajusta proporción de la imagen */
   }
 
-  .card-body {
+  .card-body 
+  {
     padding: 2vh 3vw;
     gap: 1vh;
   }
 
-  .profile {
+  .profile 
+  {
     gap: 2vw;
   }
 
-  .profile-icon {
+  .profile-icon 
+  {
     width: 10vw;
     height: 10vw;
   }
 
-  .name, .category, .title, .description {
+  .name, .category, .title, .description 
+  {
     font-size: 2vh;
   }
 
-  .card-buttons {
+  .card-buttons 
+  {
     flex-direction: column;
     gap: 1vh;
   }
 
-  .main-btn {
+  .main-btn 
+  {
     font-size: 2vh;
     padding: 1.5vh 0;
   }
 
-  .arrow {
+  .arrow 
+  {
     display: none; /* ocultar flechas en móvil */
   }
 }
