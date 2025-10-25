@@ -29,7 +29,7 @@ class Router {
             // Rutas especiales: /admin o cualquier subruta de admin
             if ($parts[0] == 'admin') {
                 $controller = 'adminauth';
-                $action = $parts[1] ?? 'login';
+                $action = 'login';
                 echo $url;
             } else {
                 // URL normal tipo /usuario/index
