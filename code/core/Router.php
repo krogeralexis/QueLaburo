@@ -2,6 +2,16 @@
 namespace Core;
 
 class Router {
+/**
+ * Función para enrutar la lógica de routing de la aplicación.
+ * Recibe la URL limpia o fallback, y devuelve los valores por defecto
+ * de controller y action. Luego, dependiendo de la URL, se establecen
+ * los valores de controller y action. Si no se proporciona una URL,
+ * se utiliza el fallback con ?controller=usuario&action=index. Se
+ * proporciona una URL, se establecen los valores de controller y action
+ * según la ruta especificada. Por último, se verifica si el controlador
+ * y la acción existen, y si no es así, se muere un mensaje de error.
+ */
     public static function route() {
         // URL limpia o fallback
         $url = $_GET['url'] ?? '';
@@ -17,7 +27,7 @@ class Router {
             echo $url;
 
             // Rutas especiales: /admin o cualquier subruta de admin
-            if ($parts[0] === 'admin') {
+            if ($parts[0] == 'admin') {
                 $controller = 'adminauth';
                 $action = $parts[1] ?? 'login';
                 echo $url;
