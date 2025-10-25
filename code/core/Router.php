@@ -8,8 +8,8 @@ class Router {
         $url = $_GET['url'] ?? '';
 
         // Valores por defecto
-        $controller = 'usuario';
-        $action = 'index';
+        // $controller = 'usuario';
+        // $action = 'index';
 
         if ($url) {
             $parts = explode('/', trim($url, '/'));
