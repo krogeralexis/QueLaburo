@@ -7,11 +7,11 @@ class AdministradorController {
     public function index() {
         $admin = new Administrador();
         $admins = $admin->getAll();
-        Core\View::render('adminPanel/administrador/index', ['administradores' => $admins]);
+        Core\View::render('admin/administrador/index', ['administradores' => $admins]);
     }
 
     public function create() {
-        Core\View::render('adminPanel/administrador/create');
+        Core\View::render('admin/administrador/create');
     }
 
     public function store() {
@@ -34,7 +34,7 @@ class AdministradorController {
         if ($id) {
             $admin = new Administrador();
             $data = $admin->getById($id);
-            Core\View::render('adminPanel/administrador/edit', ['admin' => $data]);
+            Core\View::render('admin/administrador/edit', ['admin' => $data]);
         }
     }
 
