@@ -1,6 +1,7 @@
 <?php
 namespace Core;
 
+var_dump($_GET['url']); die;
 class Router {
 /**
  * Función para enrutar la lógica de routing de la aplicación.
