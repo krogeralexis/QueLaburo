@@ -7,6 +7,18 @@ class Router {
         // URL limpia o fallback
         $url = $_GET['url'] ?? '';
 
+if (empty($url)) {
+    // Toma la ruta directamente del REQUEST_URI
+    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    // Quita la carpeta base (si tu proyecto está dentro de /queLaburochill o similar)
+    $basePath = str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']);
+    $url = trim(str_replace($basePath, '', $uri), '/');
+}
+
+$parts = explode('/', trim($url, '/'));
+var_dump($url);
+var_dump($parts);
+
         // Valores por defecto
         $controller = '';
         $action = '';
