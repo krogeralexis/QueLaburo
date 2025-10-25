@@ -18,7 +18,7 @@ class Router {
             if ($parts[0] === 'admin') {
                 $controller = 'adminauth';
                 $action = $parts[1] ?? 'login';
-                echo "Ruta especial detectada: Admin\n";
+                echo $url;
             } else {
                 // URL normal tipo /usuario/index
                 $controller = $parts[0] ?? 'usuario';
