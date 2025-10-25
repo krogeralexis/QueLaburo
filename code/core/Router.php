@@ -25,9 +25,6 @@ class Router {
                 $action = $parts[1] ?? 'index';
                 echo "3";
             }
-        } else {
-            // fallback con ?controller=usuario&action=index
-            echo "4";
         }
 
         // Limpieza básica para evitar caracteres extraños
