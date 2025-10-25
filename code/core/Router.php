@@ -8,7 +8,8 @@ class Router {
         $url = $_GET['url'] ?? '';
 
         // Valores por defecto
-        
+        $controller = 'usuario';
+        $action = 'index';
 
         if ($url) {
             $parts = explode('/', trim($url, '/'));
@@ -26,8 +27,6 @@ class Router {
             }
         } else {
             // fallback con ?controller=usuario&action=index
-            $controller = $_GET['controller'] ?? 'usuario';
-            $action = $_GET['action'] ?? 'index';
             echo "4";
         }
 
