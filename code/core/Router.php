@@ -30,7 +30,7 @@ var_dump($parts);
             var_dump($url);
 var_dump($parts);
 die();
-            if ($parts[1] === 'admin') {
+            if ($parts[0] === 'admin') {
                 $controller = 'adminauth';        // controlador para admin login
                 $action ='login';   // si no hay acción, va a login
                 echo "2";
