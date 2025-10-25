@@ -14,6 +14,8 @@ class Router {
         {
             $parts = explode('/', trim($url, '/'));
 
+            echo $url;
+
             // Rutas especiales: /admin o cualquier subruta de admin
             if ($parts[0] === 'admin') {
                 $controller = 'adminauth';
