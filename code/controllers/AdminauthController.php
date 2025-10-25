@@ -2,14 +2,11 @@
 // controllers/AdminAuthController.php
 require_once __DIR__ . '/../models/AdminAuth.php';
 require_once __DIR__ . '/../core/View.php';
-require_once __DIR__ . '/../core/AdminMiddleware.php';
-
 
 class AdminAuthController {
 
     // Muestra el login
     public function login() {
-        session_start();
 
         // Si ya hay sesión, redirige al panel
         if (isset($_SESSION['admin_id'])) {
@@ -39,16 +36,17 @@ class AdminAuthController {
 
     // Panel de administración
     public function panel() {
-        \Core\AdminMiddleware::handle(); // protege toda la acción
+
+        // Aquí se podría agregar verificación de sesión manual si quieres
+        // if (!isset($_SESSION['admin_id'])) { header('Location: index.php?controller=adminAuth&action=login'); exit; }
 
         Core\View::render('adminPanel/administrador/index', [
-            'admin_id' => $_SESSION['admin_id']
+            'admin_id' => $_SESSION['admin_id'] ?? null
         ]);
     }
 
     // Logout
     public function logout() {
-        session_start();
         session_destroy();
         header('Location: index.php?controller=adminAuth&action=login');
         exit;
