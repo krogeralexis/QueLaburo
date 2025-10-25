@@ -3,25 +3,32 @@ namespace Core;
 
 class Router {
     public static function route() {
-        // Soporta URL limpia con ?url=usuario/index o fallback
+        // URL limpia o fallback
         $url = $_GET['url'] ?? '';
 
-        if ($url === 'admin') {
-            // Atajo para /admin → login admin
-            $controller = 'adminAuth';
-            $action = 'login';
-        } elseif ($url) {
-            // URL limpia tipo /usuario/index
+        // Valores por defecto
+        $controller = 'usuario';
+        $action = 'index';
+
+        if ($url) {
             $parts = explode('/', trim($url, '/'));
-            $controller = $parts[0] ?? 'usuario';
-            $action = $parts[1] ?? 'index';
+
+            // Rutas especiales: /admin o cualquier subruta de admin
+            if ($parts[0] === 'admin') {
+                $controller = 'adminAuth';
+                $action = $parts[1] ?? 'login';
+            } else {
+                // URL normal tipo /usuario/index
+                $controller = $parts[0] ?? 'usuario';
+                $action = $parts[1] ?? 'index';
+            }
         } else {
             // fallback con ?controller=usuario&action=index
             $controller = $_GET['controller'] ?? 'usuario';
             $action = $_GET['action'] ?? 'index';
         }
 
-        // Limpieza básica
+        // Limpieza básica para evitar caracteres extraños
         $controller = preg_replace('/[^a-zA-Z0-9]/', '', $controller);
         $action = preg_replace('/[^a-zA-Z0-9]/', '', $action);
 
