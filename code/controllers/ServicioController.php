@@ -1,28 +1,65 @@
 <?php
+require_once __DIR__ . '/../core/Controller.php';
 require_once __DIR__ . '/../models/Servicio.php';
 require_once __DIR__ . '/../core/View.php';
 
-class ServicioController {
-    public function __construct() {
-        $action = $_GET['action'] ?? '';
-        $accionesPermitidas = [];
+class ServicioController extends \Core\Controller {
 
+    private $servicioModel;
+
+    public function __construct() {
+        // Instanciar el modelo
+        $this->servicioModel = new Servicio();
+
+        $action = $_GET['action'] ?? '';
+        $accionesPermitidas = ['verServicio'];
+
+        // Si no está logueado y no es acción pública, redirige
         if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) {
             header('Location: index.php?controller=login&action=index');
             exit;
         }
     }
 
-    public function index() {
-        $servicioModel = new Servicio();
-        $servicios = $servicioModel->getAll(); // Trae los servicios de la BD
-        View::render('servicio/index', ['servicios' => $servicios]);
+    /**
+     * Muestra un servicio específico
+     */
+    public function verServicio() {
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if (!$id) {
+            header('Location: index.php?controller=home&action=index');
+            exit;
+        }
+
+        $servicio = $this->servicioModel->obtenerServicioPorId($id);
+
+        if (!$servicio) {
+            header('Location: index.php?controller=home&action=index');
+            exit;
+        }
+
+        $this->render('servicio/verServicio', ['servicio' => $servicio]);
     }
 
+    /**
+     * Vista principal del panel admin (listar servicios)
+     */
+    public function indexA() {
+        $servicios = $this->servicioModel->getAll();
+        $this->render('adminPanel/servicio/index', ['servicios' => $servicios]);
+    }
+
+    /**
+     * Formulario de creación de servicio
+     */
     public function create() {
-        Core\View::render('servicio/create');
+        $this->render('adminPanel/servicio/create');
     }
 
+    /**
+     * Guardar nuevo servicio
+     */
     public function store() {
         $disponibilidad = filter_input(INPUT_POST, 'disponibilidad', FILTER_SANITIZE_STRING);
         $categoria = filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_STRING);
@@ -32,22 +69,30 @@ class ServicioController {
         $imagen = filter_input(INPUT_POST, 'imagen', FILTER_SANITIZE_STRING);
 
         if ($titulo && $precio !== false) {
-            $servicio = new Servicio();
-            $servicio->create($disponibilidad, $categoria, $descripcion, $precio, $titulo, $imagen);
+            $this->servicioModel->create($disponibilidad, $categoria, $descripcion, $precio, $titulo, $imagen);
         }
 
-        header('Location: index.php?controller=servicio&action=index');
+        header('Location: index.php?controller=servicio&action=indexA');
+        exit;
     }
 
+    /**
+     * Formulario de edición
+     */
     public function edit() {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         if ($id) {
-            $servicio = new Servicio();
-            $data = $servicio->getById($id);
-            Core\View::render('servicio/edit', ['servicio' => $data]);
+            $data = $this->servicioModel->getById($id);
+            $this->render('adminPanel/servicio/edit', ['servicio' => $data]);
+        } else {
+            header('Location: index.php?controller=servicio&action=indexA');
+            exit;
         }
     }
 
+    /**
+     * Actualiza un servicio
+     */
     public function update() {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $disponibilidad = filter_input(INPUT_POST, 'disponibilidad', FILTER_SANITIZE_STRING);
@@ -58,20 +103,23 @@ class ServicioController {
         $imagen = filter_input(INPUT_POST, 'imagen', FILTER_SANITIZE_STRING);
 
         if ($id && $titulo && $precio !== false) {
-            $servicio = new Servicio();
-            $servicio->update($id, $disponibilidad, $categoria, $descripcion, $precio, $titulo, $imagen);
+            $this->servicioModel->update($id, $disponibilidad, $categoria, $descripcion, $precio, $titulo, $imagen);
         }
 
-        header('Location: index.php?controller=servicio&action=index');
+        header('Location: index.php?controller=servicio&action=indexA');
+        exit;
     }
 
+    /**
+     * Elimina un servicio
+     */
     public function delete() {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         if ($id) {
-            $servicio = new Servicio();
-            $servicio->delete($id);
+            $this->servicioModel->delete($id);
         }
 
-        header('Location: index.php?controller=servicio&action=index');
+        header('Location: index.php?controller=servicio&action=indexA');
+        exit;
     }
 }

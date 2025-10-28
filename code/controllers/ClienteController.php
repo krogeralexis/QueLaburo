@@ -24,11 +24,11 @@ class ClienteController {
     public function index() {
         $cliente = new Cliente();
         $clientes = $cliente->getAll();
-        Core\View::render('cliente/index', ['clientes' => $clientes]);
+        Core\View::render('adminPanel/cliente/index', ['clientes' => $clientes]);
     }
 
     public function create() {
-        Core\View::render('cliente/create');
+        Core\View::render('adminPanel/cliente/create');
     }
 
     public function store() {
@@ -49,7 +49,7 @@ class ClienteController {
         if ($id) {
             $cliente = new Cliente();
             $data = $cliente->getById($id);
-            Core\View::render('cliente/edit', ['cliente' => $data]);
+            Core\View::render('adminPanel/cliente/edit', ['cliente' => $data]);
         }
     }
 

@@ -4,15 +4,15 @@ require_once 'core/Model.php';
 
 class Proveedor extends Core\Model {
     public function getAll() {
-        $stmt = $this->db->query("SELECT * FROM Proveedor INNER JOIN Usuario ON Proveedor.id_proveedor = Usuario.id");
-        return $stmt->fetchAll();
-    }
+    $stmt = $this->db->query("SELECT Proveedor.*, Usuario.*, Proveedor.calificacion AS calificacion_proveedor, Proveedor.cantidad_ventas FROM Proveedor INNER JOIN Usuario ON Proveedor.id_proveedor = Usuario.id");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    public function getById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM Proveedor INNER JOIN Usuario ON Proveedor.id_proveedor = Usuario.id WHERE Proveedor.id_proveedor = :id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch();
-    }
+public function getById($id) {
+    $stmt = $this->db->prepare("SELECT Proveedor.*, Usuario.*, Proveedor.calificacion AS calificacion_proveedor, Proveedor.cantidad_ventas FROM Proveedor INNER JOIN Usuario ON Proveedor.id_proveedor = Usuario.id WHERE Proveedor.id_proveedor = :id");
+    $stmt->execute(['id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
     public function create($nombre, $correo, $telefono, $referencias, $calificacion, $cantidad_ventas) {
         $this->db->beginTransaction();

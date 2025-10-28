@@ -13,7 +13,7 @@ class Usuario extends \Core\Model
     public function getById($id) 
     {
         $stmt = $this->db->prepare("SELECT * FROM Usuario WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+        $stmt->execute([':id' => $id]);
         return $stmt->fetch();
     }
 
@@ -65,13 +65,11 @@ class Usuario extends \Core\Model
         ]);
     }
 
-
     public function delete($id) 
     {
         $stmt = $this->db->prepare("DELETE FROM Usuario WHERE id = :id");
         $stmt->execute(['id' => $id]);
     }
-
 
     public function esCliente($id)
     {
@@ -80,8 +78,6 @@ class Usuario extends \Core\Model
         return (bool) $stmt->fetch();
     }
 
-
-
     public function esProveedor($id)
     {
         $stmt = $this->db->prepare("SELECT id_proveedor FROM Proveedor WHERE id_proveedor = :id LIMIT 1");
@@ -89,12 +85,56 @@ class Usuario extends \Core\Model
         return (bool) $stmt->fetch();
     }
 
+    // Obtener calificación promedio como cliente
+    public function getCalificacionCliente($id)
+    {
+        $stmt = $this->db->prepare("SELECT calif_cliente_promedio FROM Cliente WHERE id_cliente = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetchColumn();
+    }
+
+    // Obtener calificación promedio como proveedor
+    public function getCalificacionProveedor($id)
+    {
+        $stmt = $this->db->prepare("SELECT calif_proveedor_promedio FROM Proveedor WHERE id_proveedor = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetchColumn();
+    }
+
+    /**
+     * Obtiene todos los datos del usuario junto con sus posibles roles (cliente / proveedor)
+     */
+    public function getPerfilCompleto($id)
+    {
+        // Datos base del usuario
+        $stmt = $this->db->prepare("SELECT * FROM Usuario WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$usuario) return null;
+
+        // Verificar si es cliente
+        $stmt = $this->db->prepare("SELECT calif_cliente_promedio, cant_calif_cliente FROM Cliente WHERE id_cliente = :id");
+        $stmt->execute([':id' => $id]);
+        $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
+        $usuario['es_cliente'] = (bool) $cliente;
+        $usuario['calif_cliente'] = $cliente['calif_cliente_promedio'] ?? null;
+        $usuario['cant_calif_cliente'] = $cliente['cant_calif_cliente'] ?? 0;
+
+        // Verificar si es proveedor
+        $stmt = $this->db->prepare("SELECT referencias, cantidad_ventas, calif_proveedor_promedio, cant_calif_proveedor FROM Proveedor WHERE id_proveedor = :id");
+        $stmt->execute([':id' => $id]);
+        $proveedor = $stmt->fetch(PDO::FETCH_ASSOC);
+        $usuario['es_proveedor'] = (bool) $proveedor;
+        $usuario['referencias'] = $proveedor['referencias'] ?? null;
+        $usuario['cantidad_ventas'] = $proveedor['cantidad_ventas'] ?? 0;
+        $usuario['calif_proveedor'] = $proveedor['calif_proveedor_promedio'] ?? null;
+        $usuario['cant_calif_proveedor'] = $proveedor['cant_calif_proveedor'] ?? 0;
+
+        return $usuario;
+    }
+
     /**
      * Autentica un usuario mediante su correo y contraseña.
-     * 
-     * @param string $correo El correo del usuario.
-     * @param string $password La contraseña del usuario.
-     * @return array|bool El usuario autenticado o false si no se encuentra.
      */
     public function login($correo, $password) 
     {
@@ -110,21 +150,5 @@ class Usuario extends \Core\Model
             return $user;
         }
         return false;
-    }
-
-    // =========================================================
-    // Métodos para Google Login
-    // =========================================================
-    
-    /**
-     * Asigna un identificador de Google a un usuario
-     * 
-     * @param int $id El identificador del usuario
-     * @param string $uid El identificador de Google
-     */
-    public function setGoogleUid($id, $uid)
-    {
-        $stmt = $this->db->prepare("UPDATE Usuario SET google_uid = :uid WHERE id = :id");
-        $stmt->execute(['id' => $id, 'uid' => $uid]);
     }
 }

@@ -1,0 +1,313 @@
+/* ==============================
+   ESTILOS PRINCIPALES FLUIDOS
+============================= */
+.mis-servicios 
+{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  overflow: hidden;
+  outline: 1px black solid;
+  outline-offset: -1px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.content 
+{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 16px 16px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.title-category 
+{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category 
+{
+  width: 100%;
+}
+
+.title 
+{
+  width: 100%;
+}
+
+.paragraph 
+{
+  align-self: stretch;
+}
+
+.user-card 
+{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.user-thumb 
+{
+  width: 48px;
+  height: 48px;
+  background: #F2F4F8;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.details 
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 1 1 auto;
+}
+
+.button-1,
+.button-2 
+{
+  width: 100%;
+  max-width: 166px;
+  height: 48px;
+  background: white;
+  outline: 2px #21272A solid;
+  outline-offset: -2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.placeholder-picture,
+.placeholder-picture_01,
+.placeholder-picture_02,
+.placeholder-picture_03 
+{
+  background: #DDE1E6;
+  width: 100%;
+  max-width: 487px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.icon-jam-icons-outline-logos-user 
+{
+  position: relative;
+}
+
+/* ==============================
+   TIPOGRAFÍA
+============================= */
+.category_span 
+{
+  color: #21272A;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 17.6px;
+  word-wrap: break-word;
+}
+
+.title_span 
+{
+  color: #21272A;
+  font-size: 20px;
+  font-family: Roboto;
+  font-weight: 700;
+  line-height: 22px;
+  word-wrap: break-word;
+}
+
+.paragraph_span 
+{
+  color: #21272A;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  line-height: 22.4px;
+  word-wrap: break-word;
+}
+
+.category_01_span 
+{
+  color: #21272A;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 17.6px;
+  word-wrap: break-word;
+}
+
+.category_02_span 
+{
+  color: #697077;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 400;
+  line-height: 22.4px;
+  word-wrap: break-word;
+}
+
+.sdasd_span,
+.sdasd_01_span 
+{
+  color: #121619;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  word-wrap: break-word;
+}
+
+.text-container,
+.text-container_01 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 1024px) 
+{
+  .content 
+  {
+    padding: 16px;
+  }
+
+  .placeholder-picture,
+  .placeholder-picture_01,
+  .placeholder-picture_02,
+  .placeholder-picture_03 
+  {
+    max-width: 100%;
+  }
+
+  .button-1,
+  .button-2 
+  {
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 768px) 
+{
+  .mis-servicios 
+  {
+    padding: 12px;
+  }
+
+  .user-card 
+  {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .button-1,
+  .button-2 
+  {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) 
+{
+  .title_span 
+  {
+    font-size: 18px;
+  }
+
+  .category_span,
+  .paragraph_span,
+  .category_01_span,
+  .category_02_span,
+  .sdasd_span,
+  .sdasd_01_span 
+  {
+    font-size: 14px;
+  }
+
+  .placeholder-picture,
+  .placeholder-picture_01,
+  .placeholder-picture_02,
+  .placeholder-picture_03 
+  {
+    width: 100%;
+    height: auto;
+  }
+
+  .button-1,
+  .button-2 
+  {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* ==============================
+   MODO NOCHE
+============================= */
+body.dark-mode .mis-servicios 
+{
+  background: #1e1e1e;
+  outline-color: #444;
+}
+
+body.dark-mode .content 
+{
+  background: transparent;
+}
+
+body.dark-mode .category_span,
+body.dark-mode .title_span,
+body.dark-mode .paragraph_span,
+body.dark-mode .category_01_span,
+body.dark-mode .category_02_span,
+body.dark-mode .sdasd_span,
+body.dark-mode .sdasd_01_span 
+{
+  color: #f0f0f0;
+}
+
+body.dark-mode .user-thumb 
+{
+  background: #2a2a2a;
+}
+
+body.dark-mode .button-1,
+body.dark-mode .button-2 
+{
+  background: #2a2a2a;
+  color: #f0f0f0;
+  outline-color: #555;
+}
+
+body.dark-mode .placeholder-picture,
+body.dark-mode .placeholder-picture_01,
+body.dark-mode .placeholder-picture_02,
+body.dark-mode .placeholder-picture_03 
+{
+  background: #333;
+}

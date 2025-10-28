@@ -1,6 +1,6 @@
 <?php
 // Evitar errores si $servicios no fue definido
-$servicios = $servicios ?? []; 
+$servicios = $servicios ?? [];
 ?>
 <main>
   <!-- Buscador -->
@@ -31,7 +31,7 @@ $servicios = $servicios ?? [];
   <!-- CARRUSEL -->
   <section class="card-container">
     <button id="prevBtn" class="arrow left">
-      <img src="css/storage/flechitaIzq.svg" alt="Izquierda">
+      <img src="css/storage/flechitaIzqDia.svg" alt="Izquierda">
     </button>
 
     <div id="carouselWrapper" class="carousel-wrapper">
@@ -45,7 +45,14 @@ $servicios = $servicios ?? [];
               ? 'data:image/jpeg;base64,' . base64_encode($servicio['imagen']) 
               : 'css/storage/card-image.svg';
           $nombre = htmlspecialchars($servicio['proveedor_nombre'] ?? 'Proveedor Desconocido');
-          $foto_url = 'css/storage/userThumb.svg'; 
+          
+          // Foto de perfil sacada del usuario (tabla Usuario -> foto_perfil)
+          $foto_url = !empty($servicio['foto_perfil']) 
+              ? 'data:image/png;base64,' . base64_encode($servicio['foto_perfil'])
+              : 'css/storage/userThumb.svg';
+          
+          // ID del proveedor para enlazar al perfil
+          $proveedor_id = $servicio['proveedor_id'] ?? 0;
           ?>
           <div class="card<?php echo $copy_class; ?>">
             <img src="<?php echo $imagen; ?>" class="card-img" alt="Imagen del servicio: <?php echo $titulo; ?>">
@@ -53,17 +60,16 @@ $servicios = $servicios ?? [];
               <p class="category"><?php echo $categoria; ?></p>
               <h3 class="title"><?php echo $titulo; ?></h3>
               <p class="description"><?php echo $descripcion; ?></p>
-              <div class="profile">
-                <div class="profile-icon">
+              <div class="profile" data-user-id="<?php echo $proveedor_id; ?>">
+                <div class="profile-icon clickable">
                   <img src="<?php echo $foto_url; ?>" alt="Perfil de <?php echo $nombre; ?>" class="usr-img">
                 </div>
-                <div>
+                <div class="clickable">
                   <p class="name"><?php echo $nombre; ?></p>
                 </div>
               </div>
               <div class="card-buttons">
-                <button class="main-btn">Contratar</button>
-                <button class="main-btn">Contactar</button>
+                <a href="index.php?controller=servicio&action=verServicio&id=<?= $servicio['id_servicio'] ?>" class="main-btn">Ver servicio</a>
               </div>
             </div>
           </div>
@@ -75,7 +81,7 @@ $servicios = $servicios ?? [];
           renderServiceCard($servicio);
       }
 
-      // Renderizamos copias para efecto infinito
+      // Renderizamos copias para efecto infinito si hay suficientes servicios
       $total_servicios = count($servicios);
       if ($total_servicios >= 3) {
           for ($i = 0; $i < 3; $i++) {
@@ -86,7 +92,7 @@ $servicios = $servicios ?? [];
     </div>
 
     <button id="nextBtn" class="arrow right">
-      <img src="css/storage/flechitaDer.svg" alt="Derecha">
+      <img src="css/storage/flechitaDerDia.svg" alt="Derecha">
     </button>
   </section>
 </main>
@@ -94,3 +100,19 @@ $servicios = $servicios ?? [];
 <!-- Scripts -->
 <script src="js/carrusel.js"></script>
 <script src="js/filtrito.js"></script>
+
+<script>
+// Click en foto o nombre de proveedor -> ir a perfil
+document.addEventListener('DOMContentLoaded', () => {
+  const profiles = document.querySelectorAll('.profile .clickable, .profile-icon.clickable');
+  profiles.forEach(el => {
+    el.addEventListener('click', () => {
+      const parentProfile = el.closest('.profile');
+      const userId = parentProfile.dataset.userId;
+      if (userId) {
+        window.location.href = `index.php?controller=usuario&action=verPerfil&id=${userId}`;
+      }
+    });
+  });
+});
+</script>

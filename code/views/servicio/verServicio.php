@@ -7,7 +7,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/main-perfil.css">
+  <link rel="stylesheet" href="css/main-servicio.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -15,7 +15,7 @@
 <body>
   
   <?php include 'components/header-usuario.php'; ?>
-  <?php include 'components/main-perfil.php'; ?>
+  <?php include 'components/main-servicio.php';?>
   <?php include 'components/footer.php'; ?>
   <?php include_once 'components/modal-login.php'; ?> 
   <!-- JS -->

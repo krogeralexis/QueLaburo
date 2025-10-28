@@ -24,11 +24,11 @@ class MensajeController {
     public function index() {
         $msg = new Mensaje();
         $mensajes = $msg->getAll();
-        Core\View::render('mensaje/index', ['mensajes' => $mensajes]);
+        Core\View::render('adminPanel/mensaje/index', ['mensajes' => $mensajes]);
     }
 
     public function create() {
-        Core\View::render('mensaje/create');
+        Core\View::render('adminPanel/mensaje/create');
     }
 
     public function store() {
@@ -54,7 +54,7 @@ class MensajeController {
         if ($id_usuario && $id_mensaje) {
             $msg = new Mensaje();
             $data = $msg->getById($id_usuario, $id_mensaje);
-            Core\View::render('mensaje/edit', ['mensaje' => $data]);
+            Core\View::render('adminPanel/mensaje/edit', ['mensaje' => $data]);
         }
     }
 

@@ -22,11 +22,11 @@ class OfreceController {
     public function index() {
         $ofrece = new Ofrece();
         $datos = $ofrece->getAll();
-        Core\View::render('ofrece/index', ['datos' => $datos]);
+        Core\View::render('adminPanel/ofrece/index', ['datos' => $datos]);
     }
 
     public function create() {
-        Core\View::render('ofrece/create');
+        Core\View::render('adminPanel/ofrece/create');
     }
 
     public function store() {

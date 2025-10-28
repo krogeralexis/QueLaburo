@@ -4,15 +4,15 @@ require_once 'core/Model.php';
 
 class Cliente extends Core\Model {
     public function getAll() {
-        $stmt = $this->db->query("SELECT * FROM Cliente INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id");
-        return $stmt->fetchAll();
-    }
+    $stmt = $this->db->query("SELECT Cliente.*, Usuario.*, Cliente.calificaciones AS calificacion_cliente FROM Cliente INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    public function getById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM Cliente INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id WHERE Cliente.id_cliente = :id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch();
-    }
+public function getById($id) {
+    $stmt = $this->db->prepare("SELECT Cliente.*, Usuario.*, Cliente.calificaciones AS calificacion_cliente FROM Cliente INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id WHERE Cliente.id_cliente = :id");
+    $stmt->execute(['id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
     public function create($nombre, $correo, $telefono, $calificaciones) {
         $this->db->beginTransaction();

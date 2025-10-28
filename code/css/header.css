@@ -1,7 +1,8 @@
 /* ==============================
    HEADER LAYOUT
 ============================== */
-.header {
+.header 
+{
   display: flex;
   align-items: center;
   height: 10vh;
@@ -18,27 +19,32 @@
 /* ==============================
    LOGO
 ============================== */
-.logo {
+.logo 
+{
   display: flex;
   flex: 1;
   align-items: center;
+  justify-content: center;
   gap: 1vw;
   max-height: 100%;
   text-align: center;
   pointer-events: none;
 }
 
-.logo-image {
+.logo-image 
+{
   height: 4vh;
   width: auto;
 }
-.logo-text h1 {
+.logo-text h1 
+{
   font-size: 4vh;
   font-weight: 700;
   color: #697077;
   margin: 0;
 }
-.logo-text span {
+.logo-text span 
+{
   font-size: 2vh;
   color: #697077;
   display: block;
@@ -48,12 +54,14 @@
 /* ==============================
    NAV LEFT
 ============================== */
-.nav-left {
+.nav-left 
+{
   display: flex;
   flex: 1;
   justify-content: left;
 }
-.nav-left ul {
+.nav-left ul 
+{
   list-style: none;
   display: flex;
   align-items: center;
@@ -65,7 +73,8 @@
   padding: 0;
 }
 
-.nav-left .nav-link {
+.nav-left .nav-link 
+{
   text-decoration: none;
   font-family: "Roboto", sans-serif;
   font-size: 1em;
@@ -76,22 +85,27 @@
   transition: color 0.2s ease-in-out;
 }
 
-.nav-left .nav-link:hover {
+.nav-left .nav-link:hover 
+{
   color: #007BFF;
 }
 
-.nav-left .nav-arrow {
+.nav-left .nav-arrow 
+{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.2vw; 
+  width: 2vw; 
   height: auto;
+  padding-top: 0.7vh;
+  padding-right: 1vw;
 }
 
 /* ==============================
    NAV RIGHT
 ============================== */
-.nav-right {
+.nav-right 
+{
   display: flex;
   flex: 1;
   justify-content: flex-end;
@@ -104,7 +118,8 @@
 /* ==============================
    AUTH ACTIONS
 ============================== */
-.auth-actions {
+.auth-actions 
+{
   display: flex;
   align-items: center;
   gap: 1vw;
@@ -114,7 +129,8 @@
 /* ==============================
    BOTONES
 ============================== */
-.btn, .btn-primary {
+.btn, .btn-primary 
+{
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -133,12 +149,14 @@
 }
 
 .btn:hover,
-.btn-primary:hover {
+.btn-primary:hover 
+{
   background: #000000;
   color: #ffffff;
 }
 
-.btn-primary {
+.btn-primary 
+{
   border-color: #000000;
 }
 
@@ -146,7 +164,8 @@
    PROFILE
 ============================== */
 .profile img,
-.usr-img {
+.usr-img 
+{
   width: 6vh;
   height: 6vh;
   border-radius: 50%;
@@ -156,13 +175,15 @@
 /* ==============================
    PROFILE MENU (desplegable)
 ============================== */
-.profile-menu-container {
+.profile-menu-container 
+{
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.profile-btn {
+.profile-btn 
+{
   background: none;
   border: none;
   cursor: pointer;
@@ -171,12 +192,14 @@
   align-items: center;
 }
 
-.profile-btn:hover .usr-img {
+.profile-btn:hover .usr-img 
+{
   box-shadow: 0 0 0.4vh #00000030;
   transition: box-shadow 0.2s ease-in-out;
 }
 
-.dropdown-menu {
+.dropdown-menu 
+{
   display: none;
   position: absolute;
   right: 0;
@@ -193,7 +216,8 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.dropdown-menu a {
+.dropdown-menu a 
+{
   display: block;
   padding: 1.2vh 1.5vw;
   text-decoration: none !important;
@@ -205,18 +229,21 @@
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.dropdown-menu a:hover {
+.dropdown-menu a:hover 
+{
   background: #F2F4F8;
   color: #000000 !important;
 }
 
-.dropdown-menu.show {
+.dropdown-menu.show 
+{
   display: block;
   opacity: 1;
   transform: translateY(0);
 }
 
-.dropdown-menu .value {
+.dropdown-menu .value 
+{
   display: flex;
   align-items: center;
   gap: 0.8vw;
@@ -231,12 +258,14 @@
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
-.dropdown-menu .value img {
+.dropdown-menu .value img 
+{
   width: 1vw;
   object-fit: contain;
 }
 
-.dropdown-menu .value:hover {
+.dropdown-menu .value:hover 
+{
   background: #F2F4F8;
   color: #000000;
 }
@@ -244,7 +273,8 @@
 /* ==============================
    SWITCH ESTILO DIA/NOCHE
 ============================== */
-.switch {
+.switch 
+{
   font-size: 14px;
   position: relative;
   display: inline-block;
@@ -252,14 +282,16 @@
   height: 1.6em;            /* alto del switch */
 }
 
-.switch input {
+.switch input 
+{
   opacity: 0;
   width: 0;
   height: 0;
 }
 
 /* Slider principal */
-.slider {
+.slider 
+{
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -272,7 +304,8 @@
 }
 
 /* Círculo del switch */
-.slider:before {
+.slider:before 
+{
   position: absolute;
   content: "";
   height: 1.2em;           /* tamaño del círculo */
@@ -286,22 +319,26 @@
 }
 
 /* Checkbox marcado: modo noche */
-.switch input:checked + .slider {
+.switch input:checked + .slider 
+{
   background-color: #2196f3; /* azul noche */
 }
 
-.switch input:checked + .slider:before {
+.switch input:checked + .slider:before 
+{
   transform: translateX(1.4em);
   background-color: yellow;  /* color círculo noche */
   box-shadow: none;
 }
 
 /* Checkbox no marcado: modo día (asegura que empiece en día) */
-.switch input:not(:checked) + .slider {
+.switch input:not(:checked) + .slider 
+{
   background-color: rgb(75, 73, 74); /* gris día */
 }
 
-.switch input:not(:checked) + .slider:before {
+.switch input:not(:checked) + .slider:before 
+{
   transform: translateX(0);
   background-color: black;
   box-shadow: inset 6px -3px 0 0 white;
@@ -313,7 +350,8 @@
    HAMBURGER BUTTON (mobile)
 ============================== */
 .hamburger img,
-.ham-img {
+.ham-img 
+{
   width: 6vh;
   height: 6vh;
   border-radius: 50%;
@@ -322,20 +360,24 @@
 }
 
 .hamburger,
-.ham-img {
+.ham-img 
+{
   display: none;
 }
 
 /* ==============================
    RESPONSIVE MOBILE
 ============================== */
-@media (max-width: 768px) {
+@media (max-width: 768px) 
+{
   .hamburger,
-  .ham-img {
+  .ham-img 
+  {
     display: block;
   }
 
-  .header {
+  .header 
+  {
     height: 10vh;
     display: fixed;
     justify-content: space-between;
@@ -344,34 +386,41 @@
     position: relative;
     gap: 1vw;
   }
-  .btnLogin {
+  .btnLogin 
+  {
     display: none;
   }
 
-  .logo-image {
+  .logo-image 
+  {
     height: 4vh;
     width: auto;
   }
 
-  .logo-text h1 {
+  .logo-text h1 
+  {
     font-size: 3vh;
   }
 
-  .logo-text span {
+  .logo-text span 
+  {
     font-size: 1.6vh;
   }
 
-  .nav-left {
+  .nav-left 
+  {
     flex: 1;
     display: flex;
     align-items: center;
   }
 
-  .nav-left ul li:not(:first-child) {
+  .nav-left ul li:not(:first-child) 
+  {
     display: none;
   }
 
-  .nav-right {
+  .nav-right 
+  {
     flex: 1;
     display: flex;
     justify-content: flex-end;
@@ -381,51 +430,68 @@
 
  
 
-  .profile-menu-container {
+  .profile-menu-container 
+  {
     order: 2;
     position: relative;
   }
 
-  .usr-img {
+  .usr-img 
+  {
     width: 6vh;
     height: 6vh;
   }
 
-  .dropdown-menu {
+  .dropdown-menu 
+  {
     min-width: 50vw;
     right: 0;
     left: auto;
   }
 }
 
-/* ==============================
-   MODO OSCURO
-============================== */
-body.dark-mode {
-  background-color: #121212;
-  color: #E0E0E0;
-  background-image: url("storage/error_bg_alfaCod_v0.1.jpg");
+/* =========================
+   MODO OSCURO HEADER
+========================= */
+body.dark-mode 
+{
+  background-color: #121212 !important;
+  color: #ffffff !important;
 }
 
-body.dark-mode .header {
-  background-color: #1E1E1E;
-  border-bottom: 0.1vh solid #333;
+body.dark-mode .header 
+{
+  background-color: #1e1e1e !important;
+  border-bottom: 0.1vh solid #333 !important;
 }
 
-body.dark-mode .dropdown-menu {
-  background-color: #2A2A2A;
-  border-color: #444;
+body.dark-mode .nav-left .nav-link 
+{
+  color: #ffffff !important;
 }
 
-body.dark-mode .dropdown-menu .value,
-body.dark-mode .dropdown-menu a {
-  color: #E0E0E0 !important;
+body.dark-mode .dropdown-menu 
+{
+  background-color: #1e1e1e !important;
+  border-color: #333 !important;
 }
 
-body.dark-mode .dropdown-menu .value:hover,
-body.dark-mode .dropdown-menu a:hover {
-  background-color: #3A3A3A;
-  color: #FFFFFF !important;
+body.dark-mode .dropdown-menu a 
+{
+  color: #ffffff !important;
 }
 
-/* 🔹 Fin del menú desplegable y modo oscuro 🔹 */
+body.dark-mode .dropdown-menu a:hover,
+body.dark-mode .dropdown-menu .value:hover 
+{
+  background-color: #333 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .btn,
+body.dark-mode .btn-primary 
+{
+  background-color: #333 !important;
+  color: #ffffff !important;
+  border-color: #555 !important;
+}

@@ -22,11 +22,11 @@ class GestionaController {
     public function index() {
         $gestiona = new Gestiona();
         $datos = $gestiona->getAll();
-        Core\View::render('gestiona/index', ['datos' => $datos]);
+        Core\View::render('adminPanel/gestiona/index', ['datos' => $datos]);
     }
 
     public function create() {
-        Core\View::render('gestiona/create');
+        Core\View::render('adminPanel/gestiona/create');
     }
 
     public function store() {
@@ -49,7 +49,7 @@ class GestionaController {
         if ($id_usuario && $id_administrador) {
             $gestiona = new Gestiona();
             $dato = $gestiona->getById($id_usuario, $id_administrador);
-            Core\View::render('gestiona/edit', ['dato' => $dato]);
+            Core\View::render('adminPanel/gestiona/edit', ['dato' => $dato]);
         }
     }
 

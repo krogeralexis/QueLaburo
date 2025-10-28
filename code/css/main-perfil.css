@@ -1,0 +1,312 @@
+/* ===========================
+   PERFIL - MAIN SECTION
+=========================== */
+.perfil-view 
+{
+  box-sizing: border-box;
+  position: relative;
+  background: #268b85;
+  margin: 0 auto;
+  padding: 5vh 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===========================
+   PERFIL CARD
+=========================== */
+.perfil-card 
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5vh;
+  text-align: center;
+}
+
+/* Imagen / Avatar */
+.perfil-img-wrapper 
+{
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.perfil-img 
+{
+  width: 25vw;
+  max-width: 280px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 24vh;
+  background-color: #268b85; /* azul muy suave */
+}
+
+/* Overlay de edición */
+.perfil-edit-overlay 
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.perfil-img-wrapper:hover .perfil-edit-overlay 
+{
+  opacity: 1;
+}
+
+.perfil-edit-overlay img 
+{
+  width: 40px;
+  height: 40px;
+}
+
+/* ===========================
+   TEXTOS (Labels)
+=========================== */
+.graph-label 
+{
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 528;
+  color: #697077;
+  font-variation-settings: 'slnt' 0;
+  transition: color 0.4s ease;
+}
+
+.graph-label.nombre 
+{
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1;
+  font-weight: 600;
+}
+
+.graph-label.correo,
+.graph-label.telefono,
+.graph-label.fecha 
+{
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  line-height: 1;
+}
+
+/* ===========================
+   ICONOS + TEXTOS COMBINADOS
+=========================== */
+.info-item 
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8vw;
+}
+
+.icon 
+{
+  width: 2vw;
+  height: auto;
+}
+
+/* ===========================
+   ESTRELLAS (Valoración visual)
+=========================== */
+.stars 
+{
+  display: flex;
+  gap: 1vw;
+  justify-content: center;
+}
+
+.star.full::before 
+{
+  content: "★";
+  color: #FFD700;
+  font-size: clamp(25px, 3vw, 40px);
+}
+
+.star.half::before 
+{
+  content: "★";
+  color: #FFD700;
+  font-size: clamp(25px, 3vw, 40px);
+  position: relative;
+}
+
+.star.empty::before 
+{
+  content: "☆";
+  color: #ccc;
+  font-size: clamp(25px, 3vw, 40px);
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+.buttons 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  flex-wrap: wrap;
+  margin-top: 3vh;
+}
+
+.btn 
+{
+  font-family: 'Roboto', sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 500;
+  padding: 1vh 2vw;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.btn-primary 
+{
+  background: #21272A;
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-primary:hover 
+{
+  background: #4D5358;
+}
+
+.btn-secondary 
+{
+  background: #F2F4F8;
+  border: 1px solid #21272A;
+  color: #21272A;
+}
+
+.btn-secondary:hover 
+{
+  background: #E0E2E5;
+}
+
+/* ===========================
+   MODO OSCURO 🌙
+=========================== */
+body.dark-mode .perfil-view 
+{
+  background: #121619;
+  border: 1px solid #2F343A;
+  color: #F2F4F8;
+}
+
+body.dark-mode .graph-label 
+{
+  color: #C1C7CD;
+}
+
+body.dark-mode .perfil-card 
+{
+  background: transparent;
+}
+
+body.dark-mode .icon 
+{
+  border-color: #C1C7CD;
+}
+
+body.dark-mode .btn-primary 
+{
+  background: #F2F4F8;
+  color: #121619;
+}
+
+body.dark-mode .btn-primary:hover 
+{
+  background: #DDE1E6;
+}
+
+body.dark-mode .btn-secondary 
+{
+  background: #2F343A;
+  border: 1px solid #C1C7CD;
+  color: #F2F4F8;
+}
+
+body.dark-mode .btn-secondary:hover 
+{
+  background: #393E45;
+}
+
+/* Estrellas en modo oscuro */
+body.dark-mode .star.empty::before 
+{
+  color: #555B63;
+}
+
+/* ===========================
+   RESPONSIVE MEDIA QUERIES
+=========================== */
+@media (max-width: 768px) 
+{
+  .perfil-view 
+  {
+    padding: 5vh 3vw;
+  }
+
+  .perfil-img 
+  {
+    width: 45vw;
+  }
+
+  .graph-label.nombre 
+  {
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+  }
+
+  .info-item 
+  {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .buttons 
+  {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) 
+{
+  .perfil-img 
+  {
+    width: 60vw;
+  }
+
+  .graph-label.nombre 
+  {
+    font-size: 1.6rem;
+  }
+
+  .graph-label.correo,
+  .graph-label.telefono,
+  .graph-label.fecha 
+  {
+    font-size: 1.1rem;
+  }
+
+  .star 
+  {
+    width: 30px;
+    height: 27px;
+  }
+}

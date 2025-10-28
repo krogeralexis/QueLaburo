@@ -101,7 +101,7 @@
 <div class="navbar">
     <a href="index.php?controller=usuario&action=index">Usuarios</a>
     <a href="index.php?controller=cliente&action=index">Clientes</a>
-    <a href="index.php?controller=proveedor&action=index">Proveedores</a>
+    <a href="index.php?controller=proveedor&action=indexA">Proveedores</a>
     <a href="index.php?controller=administrador&action=index">Administradores</a>
     <a href="index.php?controller=reserva&action=index">Reservas</a>
     <a href="index.php?controller=mensaje&action=index">Mensajes</a>

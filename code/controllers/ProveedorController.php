@@ -19,10 +19,10 @@ class ProveedorController {
             exit;
         }
     }
-    public function index() {
+    public function indexA() {
         $proveedor = new Proveedor();
         $proveedores = $proveedor->getAll();
-        Core\View::render('proveedor/index', ['proveedores' => $proveedores]);
+        Core\View::render('adminPanel/proveedor/index', ['proveedores' => $proveedores]);
     }
 
     public function create() {
