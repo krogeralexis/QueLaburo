@@ -24,7 +24,7 @@ class Usuario extends \Core\Model
         return $stmt->fetch();
     }
 
-    public function create($nombre, $correo, $telefono, $password, $google_uid = null) 
+    public function create($nombre, $correo, $telefono, $password, $google_uid= null) 
     {
         try 
         {

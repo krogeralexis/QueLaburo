@@ -8,6 +8,8 @@ class LoginController
     public function __construct() 
     {
         $this->usuarioModel = new Usuario();
+        // NOTA IMPORTANTE: Asegúrate de llamar a session_start() al inicio de tu aplicación
+        // para que las variables $_SESSION funcionen correctamente.
     }
 
     public function index($error = '') {
@@ -15,11 +17,9 @@ class LoginController
     }
 
     
-
-
-    // =========================================================
-    // LOGIN NORMAL
-    // =========================================================
+// ---------------------------------------------------------
+// LOGIN NORMAL
+// ---------------------------------------------------------
     public function authenticate() 
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
@@ -27,6 +27,7 @@ class LoginController
             $correo = $_POST['correo'] ?? '';
             $password = $_POST['password'] ?? '';
 
+            // Detección básica de SQLi (recomendación: usar consultas preparadas en el modelo)
             $sqli_patterns = [
                 '/(\bor\b|\band\b)\s+\d+=\d+/i', 
                 '/(\'|")\s*--/', 
@@ -75,15 +76,27 @@ class LoginController
         }
     }
 
-    // =========================================================
-    // REGISTRO
-    // =========================================================
+// ---------------------------------------------------------
+// REGISTRO
+// ---------------------------------------------------------
     public function registerview() 
     {
+        // 1. Recuperar errores y datos antiguos de la sesión (si existen)
+        $errors = $_SESSION['errors'] ?? [];
+        $old_data = $_SESSION['old_data'] ?? [];
+        
+        // 2. Limpiar la sesión para que no se muestren en la siguiente carga
+        unset($_SESSION['errors']);
+        unset($_SESSION['old_data']);
+
+        // 3. Cargar la vista de registro
         require 'views/login/register.php';
     }
 
     /**
+     * Registro de usuario
+     */
+   /**
      * Registro de usuario
      *
      * Verifica que se haya realizado un pedido POST y que se hayan proporcionado
@@ -98,7 +111,7 @@ class LoginController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
         {
             $nombre   = trim($_POST['nombre'] ?? '');
-            $apellido = trim($_POST['apellido'] ?? '');
+            // $apellido = trim($_POST['apellido'] ?? ''); // ELIMINADO: El formulario solo envía 'nombre'
             $correo   = trim($_POST['correo'] ?? '');
             $telefono = trim($_POST['telefono'] ?? '');
             $password = trim($_POST['password'] ?? '');
@@ -107,7 +120,8 @@ class LoginController
 
             $errors = [];
 
-            if (!$nombre || !$apellido || !$correo || !$password || !$confirm) 
+            // MODIFICADO: Se eliminó !$apellido y se agregó !$telefono a la validación principal
+            if (!$nombre || !$correo || !$telefono || !$password || !$confirm) 
                 $errors[] = "Todos los campos son obligatorios.";
             if ($password !== $confirm) 
                 $errors[] = "Las contraseñas no coinciden.";
@@ -115,13 +129,16 @@ class LoginController
                 $errors[] = "Debe aceptar los términos y condiciones.";
             if ($this->usuarioModel->exists($correo)) 
                 $errors[] = "El correo ya está registrado.";
-            if (!$telefono) 
-                $errors[] = "Debe ingresar su teléfono.";
+            
+            // ELIMINADO: El chequeo de $telefono ya está en la validación principal
+            // if (!$telefono) 
+            //    $errors[] = "Debe ingresar su teléfono.";
 
             if (empty($errors)) 
             {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                $this->usuarioModel->create($nombre . ' ' . $apellido, $correo, $telefono, $hashedPassword);
+                // MODIFICADO: Se pasa $nombre directamente, ya que el modelo espera el nombre completo
+                $this->usuarioModel->create($nombre, $correo, $telefono, $hashedPassword);
                 header('Location: index.php?controller=usuario&action=index&success=1');
                 exit;
             } else {
@@ -133,9 +150,9 @@ class LoginController
     }
 
 
-    // =========================================================
-    // LOGOUT
-    // =========================================================
+// ---------------------------------------------------------
+// LOGOUT
+// ---------------------------------------------------------
     public function logout() 
     {
         session_destroy();
