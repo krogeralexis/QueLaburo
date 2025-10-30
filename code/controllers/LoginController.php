@@ -80,8 +80,7 @@ class LoginController
     // =========================================================
     public function registerview() 
     {
-        header('Location: index.php?controller=usuario&action=index&mode=register');
-        exit;
+        require 'views/login/register.php';
     }
 
     /**
@@ -126,10 +125,10 @@ class LoginController
                 header('Location: index.php?controller=usuario&action=index&success=1');
                 exit;
             } else {
-                require 'views/login/login.php';
+                require 'views/login/register.php';
             }
         } else {
-            require 'views/login/login.php';
+            require 'views/login/register.php';
         }   
     }
 
