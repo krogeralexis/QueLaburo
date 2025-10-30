@@ -26,7 +26,7 @@ $es_admin   = $es_admin ?? false;
     <?php endif; ?>
 
     <!-- Notificaciones -->
-    <a id="campanita" class="value" href="index.php?controller=usuario&action=Notificaciones">
+    <a id="campanita" class="value" href="index.php?controller=mensaje&action=mensajeria">
       <img src="css/storage/campanitaDia.svg" alt="Bell Icon" class="icon-bell">
       Mensajes
     </a>

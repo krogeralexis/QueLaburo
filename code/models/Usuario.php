@@ -84,6 +84,13 @@ class Usuario extends \Core\Model
         return (bool) $stmt->fetch();
     }
 
+    public function esadmin($id)
+    {
+        $stmt = $this->db->prepare("SELECT id_administrador FROM Administrador WHERE id_administrador = :id LIMIT 1");
+        $stmt->execute([':id' => $id]);
+        return (bool) $stmt->fetch();
+    }
+
     // Obtener calificación promedio como cliente
     public function getCalificacionCliente($id)
     {

@@ -38,6 +38,10 @@ class ServicioController extends \Core\Controller {
         $this->render('servicio/verServicio', ['servicio' => $servicio]);
     }
 
+    public function publicar() {
+        $this->render('servicio/publicar');
+    }
+
     public function indexA() {
         $servicios = $this->servicioModel->getAll();
         $this->render('adminPanel/servicio/index', ['servicios' => $servicios]);

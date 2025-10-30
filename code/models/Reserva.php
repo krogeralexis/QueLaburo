@@ -22,6 +22,54 @@ class Reserva extends Core\Model {
     }
 
     /**
+ * Devuelve los usuarios con los que el usuario $id_usuario ha tenido reservas
+ * (cliente <-> proveedor) sin crear tablas nuevas.
+ *
+ * NOTA: usa los nombres de tabla/columnas que asume tu proyecto:
+ * - Usuario (tabla de usuarios) con columna id
+ * - Servicio con columna id y id_proveedor
+ * - Reserva con columnas id_servicio e id_cliente
+ *
+ * Si tus columnas tienen otros nombres, adáptalos aquí.
+ */
+public function getContactosPorReservas($id_usuario) {
+    try {
+        $sql = "
+            SELECT DISTINCT u.*
+            FROM Usuario u
+            WHERE u.id != :id
+              AND (
+                -- usuarios que son proveedores de servicios que el usuario reservó (si yo soy cliente)
+                u.id IN (
+                  SELECT s.id_proveedor
+                  FROM Servicio s
+                  JOIN Reserva r ON r.id_servicio = s.id
+                  WHERE r.id_cliente = :id
+                )
+                OR
+                -- usuarios que son clientes que reservaron mis servicios (si yo soy proveedor)
+                u.id IN (
+                  SELECT r.id_cliente
+                  FROM Reserva r
+                  JOIN Servicio s ON r.id_servicio = s.id
+                  WHERE s.id_proveedor = :id
+                )
+              )
+        ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id' => $id_usuario]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e) {
+        error_log("Reserva::getContactosPorReservas error: " . $e->getMessage());
+        return []; // no rompear la app
+    }
+}
+
+
+
+    /**
      * Obtener reservas de un cliente
      */
     public function getByCliente($id_cliente) {
