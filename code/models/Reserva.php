@@ -3,55 +3,113 @@
 require_once 'core/Model.php';
 
 class Reserva extends Core\Model {
+
+    /**
+     * Obtener todas las reservas
+     */
     public function getAll() {
-        $stmt = $this->db->query("SELECT * FROM Reserva");
-        return $stmt->fetchAll();
+        $stmt = $this->db->query("SELECT * FROM Reserva ORDER BY fecha_reserva DESC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($id_reserva, $id_cliente, $id_proveedor, $id_servicio) {
-        $stmt = $this->db->prepare("SELECT * FROM Reserva WHERE id_reserva = :id_reserva AND id_cliente = :id_cliente AND id_proveedor = :id_proveedor AND id_servicio = :id_servicio");
+    /**
+     * Obtener reserva por ID
+     */
+    public function getById($id_reserva) {
+        $stmt = $this->db->prepare("SELECT * FROM Reserva WHERE id_reserva = :id_reserva");
+        $stmt->execute(['id_reserva' => $id_reserva]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Obtener reservas de un cliente
+     */
+    public function getByCliente($id_cliente) {
+        $stmt = $this->db->prepare("
+            SELECT r.*, s.titulo 
+            FROM Reserva r 
+            LEFT JOIN Servicio s ON r.id_servicio = s.id_servicio 
+            WHERE r.id_cliente = :id_cliente 
+            ORDER BY r.fecha_reserva DESC
+        ");
+        $stmt->execute(['id_cliente' => $id_cliente]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Comprobar disponibilidad exacta (fecha y hora)
+     */
+    public function isDisponible($id_servicio, $fechaHora) {
+        $stmt = $this->db->prepare("
+            SELECT COUNT(*) AS cnt 
+            FROM Reserva 
+            WHERE id_servicio = :id_servicio 
+              AND fecha_reserva = :fecha_reserva 
+              AND estado <> 'cancelada'
+        ");
         $stmt->execute([
-            'id_reserva' => $id_reserva,
-            'id_cliente' => $id_cliente,
-            'id_proveedor' => $id_proveedor,
-            'id_servicio' => $id_servicio
+            'id_servicio'   => $id_servicio,
+            'fecha_reserva' => $fechaHora
         ]);
-        return $stmt->fetch();
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ($r['cnt'] == 0);
     }
 
-    public function create($id_reserva, $id_cliente, $id_proveedor, $id_servicio, $recordatorio, $resena, $fecha_reserva) {
-        $stmt = $this->db->prepare("INSERT INTO Reserva (id_reserva, id_cliente, id_proveedor, id_servicio, recordatorio, reseña, fecha_reserva) VALUES (:id_reserva, :id_cliente, :id_proveedor, :id_servicio, :recordatorio, :resena, :fecha_reserva)");
+    /**
+     * Crear una reserva
+     */
+    public function create($id_cliente, $id_proveedor, $id_servicio, $resena, $fecha_reserva, $notas = null) {
+        $stmt = $this->db->prepare("
+            INSERT INTO Reserva 
+                (id_cliente, id_proveedor, id_servicio, resena, fecha_reserva, notas, estado) 
+            VALUES 
+                (:id_cliente, :id_proveedor, :id_servicio, :resena, :fecha_reserva, :notas, 'pendiente')
+        ");
         $stmt->execute([
-            'id_reserva' => $id_reserva,
-            'id_cliente' => $id_cliente,
-            'id_proveedor' => $id_proveedor,
-            'id_servicio' => $id_servicio,
-            'recordatorio' => $recordatorio,
-            'resena' => $resena,
-            'fecha_reserva' => $fecha_reserva
+            'id_cliente'    => $id_cliente,
+            'id_proveedor'  => $id_proveedor,
+            'id_servicio'   => $id_servicio,
+            'resena'        => $resena,
+            'fecha_reserva' => $fecha_reserva,
+            'notas'         => $notas
+        ]);
+        return $this->db->lastInsertId();
+    }
+
+    /**
+     * Actualizar estado de la reserva
+     */
+    public function updateEstado($id_reserva, $estado) {
+        $stmt = $this->db->prepare("
+            UPDATE Reserva SET estado = :estado WHERE id_reserva = :id_reserva
+        ");
+        $stmt->execute([
+            'estado'       => $estado,
+            'id_reserva'   => $id_reserva
         ]);
     }
 
-    public function update($id_reserva, $id_cliente, $id_proveedor, $id_servicio, $recordatorio, $resena, $fecha_reserva) {
-        $stmt = $this->db->prepare("UPDATE Reserva SET recordatorio = :recordatorio, reseña = :resena, fecha_reserva = :fecha_reserva WHERE id_reserva = :id_reserva AND id_cliente = :id_cliente AND id_proveedor = :id_proveedor AND id_servicio = :id_servicio");
-        $stmt->execute([
-            'id_reserva' => $id_reserva,
-            'id_cliente' => $id_cliente,
-            'id_proveedor' => $id_proveedor,
-            'id_servicio' => $id_servicio,
-            'recordatorio' => $recordatorio,
-            'resena' => $resena,
-            'fecha_reserva' => $fecha_reserva
-        ]);
+    /**
+     * Cancelar reserva (actualiza estado)
+     */
+    public function cancel($id_reserva) {
+        $this->updateEstado($id_reserva, 'cancelada');
     }
 
-    public function delete($id_reserva, $id_cliente, $id_proveedor, $id_servicio) {
-        $stmt = $this->db->prepare("DELETE FROM Reserva WHERE id_reserva = :id_reserva AND id_cliente = :id_cliente AND id_proveedor = :id_proveedor AND id_servicio = :id_servicio");
+    /**
+     * Actualizar reserva
+     */
+    public function update($id_reserva, $resena, $fecha_reserva, $notas = null) {
+        $stmt = $this->db->prepare("
+            UPDATE Reserva 
+            SET resena = :resena, fecha_reserva = :fecha_reserva, notas = :notas 
+            WHERE id_reserva = :id_reserva
+        ");
         $stmt->execute([
-            'id_reserva' => $id_reserva,
-            'id_cliente' => $id_cliente,
-            'id_proveedor' => $id_proveedor,
-            'id_servicio' => $id_servicio
+            'resena'        => $resena,
+            'fecha_reserva' => $fecha_reserva,
+            'notas'         => $notas,
+            'id_reserva'    => $id_reserva
         ]);
     }
 }

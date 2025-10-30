@@ -1,7 +1,7 @@
 <?php
 // Evitar errores si $servicio no fue definido
 $servicio = $servicio ?? [];
-
+  
 $categoria    = htmlspecialchars($servicio['categoria'] ?? 'Sin Categoría');
 $titulo       = htmlspecialchars($servicio['titulo'] ?? 'Sin Título');
 $descripcion  = htmlspecialchars($servicio['descripcion'] ?? 'Descripción no disponible.');
@@ -49,14 +49,14 @@ $rol          = $servicio['rol'] ?? 'Proveedor';
       </div>
     </div>
 
-    <div class="button-1">
-      <a href="index.php?controller=servicio&action=reservar&id=<?= $id_servicio ?>" class="text-container">
-        <span class="sdasd_span">Reservar</span>
-      </a>
+   <div class="button-1">
+      <button id="btnReservar" class="text-container" data-id-servicio="<?= $id_servicio ?>">Reservar</button>
     </div>
 
     <img class="placeholder-picture" src="<?= $imagen ?>" alt="Imagen del servicio"/>
   </div>
+
+  
 </main>
 
 <script>

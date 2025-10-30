@@ -68,45 +68,45 @@ class UsuarioController extends \Core\Controller {
      * Ver perfil de usuario
      */
     public function verPerfil() 
+{
+    // Obtener ID desde GET, si no existe usar el de la sesión
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) 
+          ?? $_SESSION['usuario']['id'] ?? 1; // 1 solo como último recurso
+
+    $usuarioModel = new Usuario();
+    $data = $usuarioModel->getById($id);
+
+    if ($data) 
     {
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        if (!$id) 
-        {
-            $id = 1; // Valor predeterminado
-        }
+        // Determinar si es cliente o proveedor
+        $es_cliente = $usuarioModel->esCliente($id);
+        $es_proveedor = $usuarioModel->esProveedor($id);
 
-        $usuarioModel = new Usuario();
-        $data = $usuarioModel->getById($id);
+        // Obtener calificaciones y cantidad
+        $calif_cliente = $es_cliente ? $usuarioModel->getCalificacionCliente($id) : null;
+        $cant_calif_cliente = $es_cliente ? $usuarioModel->getPerfilCompleto($id)['cant_calif_cliente'] : 0;
 
-        if ($data) 
-        {
-            // Determinar si es cliente o proveedor
-            $es_cliente = $usuarioModel->esCliente($id);
-            $es_proveedor = $usuarioModel->esProveedor($id);
+        $calif_proveedor = $es_proveedor ? $usuarioModel->getCalificacionProveedor($id) : null;
+        $cant_calif_proveedor = $es_proveedor ? $usuarioModel->getPerfilCompleto($id)['cant_calif_proveedor'] : 0;
 
-            // Obtener calificaciones y cantidad
-            $calif_cliente = $es_cliente ? $usuarioModel->getCalificacionCliente($id) : null;
-            $cant_calif_cliente = $es_cliente ? $usuarioModel->getPerfilCompleto($id)['cant_calif_cliente'] : 0;
-
-            $calif_proveedor = $es_proveedor ? $usuarioModel->getCalificacionProveedor($id) : null;
-            $cant_calif_proveedor = $es_proveedor ? $usuarioModel->getPerfilCompleto($id)['cant_calif_proveedor'] : 0;
-
-            // Renderizar la vista pasando toda la información
-            $this->render('usuario/perfil', 
-            [
-                'usuario' => $data,
-                'es_cliente' => $es_cliente,
-                'es_proveedor' => $es_proveedor,
-                'calif_cliente' => $calif_cliente,
-                'cant_calif_cliente' => $cant_calif_cliente,
-                'calif_proveedor' => $calif_proveedor,
-                'cant_calif_proveedor' => $cant_calif_proveedor
-            ]);
-            return;
-        }
-
-        $this->redirect('index.php?controller=usuario&action=index');
+        // Renderizar la vista pasando toda la información
+        $this->render('usuario/perfil', 
+        [
+            'usuario' => $data,
+            'es_cliente' => $es_cliente,
+            'es_proveedor' => $es_proveedor,
+            'calif_cliente' => $calif_cliente,
+            'cant_calif_cliente' => $cant_calif_cliente,
+            'calif_proveedor' => $calif_proveedor,
+            'cant_calif_proveedor' => $cant_calif_proveedor
+        ]);
+        return;
     }
+
+    // Si no existe el usuario, redirigir al índice
+    $this->redirect('index.php?controller=usuario&action=index');
+}
+
 
 
 }

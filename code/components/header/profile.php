@@ -19,7 +19,7 @@ $es_admin   = $es_admin ?? false;
 
     <!-- Mis reservas (solo para clientes) -->
     <?php if ($es_cliente): ?>
-      <a id="reservas" class="value" href="index.php?controller=cliente&action=VerReservas">
+      <a id="reservas" class="value" href="index.php?controller=cliente&action=verReservas">
         <img src="css/storage/reservasDia.svg" alt="Bookings Icon" class="icon-bookings">
         Mis reservas
       </a>
@@ -33,14 +33,14 @@ $es_admin   = $es_admin ?? false;
 
     <!-- Mis servicios (solo para proveedores) -->
     <?php if ($es_proveedor): ?>
-      <a id="reservas" class="value" href="index.php?controller=proveedor&action=VerMisServicios">
+      <a id="reservas" class="value" href="index.php?controller=proveedor&action=misServicios">
         <img src="css/storage/reservasDia.svg" alt="Bookings Icon" class="icon-bookings">
         Mis servicios
       </a>
     <?php endif; ?>
 
     <?php if ($es_admin): ?>
-      <a id="reservas" class="value" href="index.php?controller=proveedor&action=VerMisServicios">
+      <a id="reservas" class="value" href="index.php?controller=administrador&action=index">
         <img src="css/storage/reservasDia.svg" alt="Bookings Icon" class="icon-bookings">
         Admin Panel
       </a>

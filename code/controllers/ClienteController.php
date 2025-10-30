@@ -1,26 +1,24 @@
 <?php
 // controllers/ClienteController.php
 require_once __DIR__ . '/../models/Cliente.php';
+require_once __DIR__ . '/../models/Reserva.php';
+require_once __DIR__ . '/../models/Servicio.php';
 require_once __DIR__ . '/../core/View.php';
 
 class ClienteController {
 
     public function __construct() 
     {
-        /*Premade de seguridad para no permitr a usuarios no
-        logeados entrar a los controller, metodo $accionesPermitidas
-        permite evadirlo para poder hacer pruebas
-        */
-    $action = $_GET['action'] ?? '';
+        // Bloqueo general de acceso a usuarios no logueados
+        $action = $_GET['action'] ?? '';
 
-    $accionesPermitidas = [];
-
-    if (!isset($_SESSION['usuario']) && !in_array($action, $accionesPermitidas)) 
-        {
+        if (!isset($_SESSION['usuario']) && !in_array($action, )) {
             header('Location: index.php?controller=login&action=index');
             exit;
         }
     }
+
+    // ---------- CRUD ADMIN ----------
     public function index() {
         $cliente = new Cliente();
         $clientes = $cliente->getAll();
@@ -75,4 +73,27 @@ class ClienteController {
         }
         header('Location: index.php?controller=cliente&action=index');
     }
+
+    // ---------- CLIENTE PANEL ----------
+
+    
+    public function verReservas() {
+    $id_usuario = $_SESSION['usuario']['id'] ?? null;
+
+    if (!$id_usuario) {
+        $_SESSION['flash_error'] = "Debes iniciar sesión.";
+        header('Location: index.php?controller=login&action=index');
+        exit;
+    }
+
+    $servicioModel = new Servicio();
+    $servicios = $servicioModel->getServiciosPorCliente($id_usuario);
+
+    Core\View::render('cliente/misReservas', [
+        'servicios' => $servicios
+    ]);
+}
+
+
+
 }

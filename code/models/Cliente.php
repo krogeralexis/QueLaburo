@@ -4,43 +4,40 @@ require_once 'core/Model.php';
 
 class Cliente extends Core\Model {
     public function getAll() {
-    $stmt = $this->db->query("SELECT Cliente.*, Usuario.*, Cliente.calificaciones AS calificacion_cliente FROM Cliente INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-public function getById($id) {
-    $stmt = $this->db->prepare("SELECT Cliente.*, Usuario.*, Cliente.calificaciones AS calificacion_cliente FROM Cliente INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id WHERE Cliente.id_cliente = :id");
-    $stmt->execute(['id' => $id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-    public function create($nombre, $correo, $telefono, $calificaciones) {
-        $this->db->beginTransaction();
-
-        // Insertar en Usuario
-        $stmt1 = $this->db->prepare("INSERT INTO Usuario (fecha_creacion, nombre, correo, telefono) VALUES (NOW(), :nombre, :correo, :telefono)");
-        $stmt1->execute([
-            'nombre' => $nombre,
-            'correo' => $correo,
-            'telefono' => $telefono
-        ]);
-        $id = $this->db->lastInsertId();
-
-        // Insertar en Cliente
-        $stmt2 = $this->db->prepare("INSERT INTO Cliente (id_cliente, fecha_creacion, nombre, correo, telefono, calificaciones) VALUES (:id, NOW(), :nombre, :correo, :telefono, :calificaciones)");
-        $stmt2->execute([
-            'id' => $id,
-            'nombre' => $nombre,
-            'correo' => $correo,
-            'telefono' => $telefono,
-            'calificaciones' => $calificaciones
-        ]);
-
-        $this->db->commit();
+        $stmt = $this->db->query("
+            SELECT Cliente.*, Usuario.*, Cliente.calif_cliente_promedio AS calificacion_cliente
+            FROM Cliente
+            INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id
+        ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function update($id, $nombre, $correo, $telefono, $calificaciones) {
-        $stmt1 = $this->db->prepare("UPDATE Usuario SET nombre = :nombre, correo = :correo, telefono = :telefono WHERE id = :id");
+    public function getById($id) {
+        $stmt = $this->db->prepare("
+            SELECT Cliente.*, Usuario.*, Cliente.calif_cliente_promedio AS calificacion_cliente
+            FROM Cliente
+            INNER JOIN Usuario ON Cliente.id_cliente = Usuario.id
+            WHERE Cliente.id_cliente = :id
+        ");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function create($id_cliente, $calif_cliente_promedio = 0, $cant_calif_cliente = 0) {
+    $stmt = $this->db->prepare("INSERT INTO Cliente (id_cliente, calif_cliente_promedio, cant_calif_cliente) VALUES (:id_cliente, :calif_cliente_promedio, :cant_calif_cliente)");
+    $stmt->execute([
+        'id_cliente' => $id_cliente,
+        'calif_cliente_promedio' => $calif_cliente_promedio,
+        'cant_calif_cliente' => $cant_calif_cliente
+    ]);
+}
+
+    public function update($id, $nombre, $correo, $telefono, $calif_cliente_promedio) {
+        $stmt1 = $this->db->prepare("
+            UPDATE Usuario
+            SET nombre = :nombre, correo = :correo, telefono = :telefono
+            WHERE id = :id
+        ");
         $stmt1->execute([
             'id' => $id,
             'nombre' => $nombre,
@@ -48,13 +45,17 @@ public function getById($id) {
             'telefono' => $telefono
         ]);
 
-        $stmt2 = $this->db->prepare("UPDATE Cliente SET nombre = :nombre, correo = :correo, telefono = :telefono, calificaciones = :calificaciones WHERE id_cliente = :id");
+        $stmt2 = $this->db->prepare("
+            UPDATE Cliente
+            SET nombre = :nombre, correo = :correo, telefono = :telefono, calif_cliente_promedio = :calif_cliente_promedio
+            WHERE id_cliente = :id
+        ");
         $stmt2->execute([
             'id' => $id,
             'nombre' => $nombre,
             'correo' => $correo,
             'telefono' => $telefono,
-            'calificaciones' => $calificaciones
+            'calif_cliente_promedio' => $calif_cliente_promedio
         ]);
     }
 

@@ -14,10 +14,10 @@ $usuario_esta_logeado = isset($_SESSION['usuario']['id']);
 
     <li><a href="index.php?controller=proveedor&action=index" class="nav-link">Conviertete en Proveedor</a></li>
     <li>
-      <a href="#" class="nav-link">
+      <!-- <a href="#" class="nav-link">
         Explora
         <img src="css/storage/flechitaAbajo.svg" alt="Flecha abajo" class="nav-arrow" id="exploreArrow">
-      </a>
+      </a> -->
     </li>
   </ul>
 </nav>

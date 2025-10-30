@@ -2,6 +2,7 @@
 $usuario = $usuario ?? [];
 $es_cliente = $es_cliente ?? false;
 $es_proveedor = $es_proveedor ?? false;
+$proveedor = $es_proveedor ? $usuario : null;
 
 $calif_cliente = $usuario['calif_cliente'] ?? null;
 $calif_proveedor = $usuario['calif_proveedor'] ?? null;
@@ -97,7 +98,7 @@ $es_propietario = ($usuario_actual_id === $usuario['id']);
         <div class="icon note"></div>
         <div class="graph-label">
           <label>Referencias:</label>
-          <span><?= htmlspecialchars($usuario['referencias'] ?? 'Ninguna') ?></span>
+          <span><?= htmlspecialchars($proveedor['referencias'] ?? 'Ninguna') ?></span>
         </div>
       </div>
 
@@ -105,7 +106,7 @@ $es_propietario = ($usuario_actual_id === $usuario['id']);
         <div class="icon sales"></div>
         <div class="graph-label">
           <label>Cantidad de ventas:</label>
-          <span><?= htmlspecialchars($usuario['cantidad_ventas']) ?></span>
+          <span><?= htmlspecialchars($proveedor['cantidad_ventas'] ?? 0) ?></span>
         </div>
       </div>
     <?php endif; ?>

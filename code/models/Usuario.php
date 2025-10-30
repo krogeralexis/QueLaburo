@@ -29,15 +29,14 @@ class Usuario extends \Core\Model
         try 
         {
             $stmt = $this->db->prepare("
-                INSERT INTO Usuario (fecha_creacion, nombre, correo, telefono, password, google_uid) 
-                VALUES (NOW(), :nombre, :correo, :telefono, :password, :google_uid)
+                INSERT INTO Usuario (fecha_creacion, nombre, correo, telefono, password) 
+                VALUES (NOW(), :nombre, :correo, :telefono, :password)
             ");
             $stmt->execute([
                 ':nombre'     => $nombre,
                 ':correo'     => $correo,
                 ':telefono'   => $telefono,
-                ':password'   => $password,
-                ':google_uid' => $google_uid
+                ':password'   => $password
             ]);
             return true;
         } catch (PDOException $e) 
